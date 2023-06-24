@@ -2,6 +2,11 @@
     //Include the database to the webpage to access it
     include_once("../inc/database.php");
 
+	//Check if the current user is allowed to access the webpage
+	//Only the guest can access this webpage
+	if(isset($_SESSION['userType'])) {
+		header("Location: ../index.php");
+	}
 ?>
 
 <!doctype html>
@@ -49,6 +54,7 @@
 			$password = htmlspecialchars(strip_tags($password));
 			$password = sha1($password);
 
+			// For Error Messages
 			$userInputs = array("email" => $email, "password" => $password);
 
 			foreach($userInputs as $k => $v) {
@@ -59,6 +65,7 @@
 			if(!$email) 
 				$error["email"] = "Invalid Email Address";
 
+			// Query to select the user
 			$sqlQuery = "SELECT * FROM tbl_users WHERE email = '$email'";
 			$sqlQueryResult = $connection->query($sqlQuery);
 			$userData = $sqlQueryResult->fetch_assoc();
@@ -67,7 +74,7 @@
 					$_SESSION['login'] = true;
 					$_SESSION['userId'] = $userData['id'];
 					$_SESSION['userType'] = $userData['user_type'];
-					header("Location: ../template.php");
+					header("Location: home.php");
 					exit();
 				} else {
 					$error['email'] = $error['password'] = "Invalid email or password.";

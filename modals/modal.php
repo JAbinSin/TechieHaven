@@ -1,22 +1,21 @@
 <!-- Modal -->
-<div class="modal fade" id="modalRegister" tabindex="-1" aria-labelledby="modalRegisterLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog">
     <div class="modal-content">
     <div class="modal-header">
         <h5 class="modal-title" id="myLabel">Message</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
-    <div class="modal-body" id="modalRegisterOutput">
+    <div class="modal-body" id="myModalOutput">
         
     </div>
-    <div class="modal-footer">
+    <div class="modal-footer" id="myModalButtons">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <a class="btn btn-primary" href="login.php" role="button">Login</a>
     </div>
     </div>
 </div>
 </div>
 
 <script>
-    var modalRegister = new bootstrap.Modal(document.getElementById('modalRegister'))
+    var myModal = new bootstrap.Modal(document.getElementById('myModal'))
 </script>

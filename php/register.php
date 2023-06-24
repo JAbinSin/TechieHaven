@@ -79,6 +79,7 @@
 
 			$_SESSION["modalEmail"] = $email;
 
+			// For the Error Messages
 			$userInputs = array("fName" => $fName, "mName" => $mName, "lName" => $lName, "email" => $email, "password" => $password, "confirmPassword" => $confirmPassword, "address" => $address, "city" => $city, "region" => $region, "zipCode" => $zipCode, "cellphoneNumber" => $cellphoneNumber);
 
 			if(!($password === $confirmPassword))
@@ -92,6 +93,8 @@
 			if(!$email) 
 				$error["email"] = "Invalid Email Address";
 
+
+			// Query to find if the Email already exist
 			$sqlQuery = "SELECT email FROM tbl_users WHERE email = '$email'";
 			$sqlQueryResult = $connection->query($sqlQuery);
 			if($sqlQueryResult->num_rows > 0)  
@@ -105,7 +108,7 @@
 					$_SESSION[$k] = $v;
 				}
 
-				include("../modals/modalRegister.php");
+				include("../modals/modal.php");
 				
 
 				// INSERT new user
@@ -128,15 +131,16 @@
 					$cellphoneNumber = "";
 
 					?>
-					<script>document.getElementById("modalRegisterOutput").innerHTML = "<?php echo $_SESSION["modalEmail"]; ?> Successfuly Registered"</script>
-					<script>modalRegister.show()</script>
+					<script>document.getElementById("myModalButtons").insertAdjacentHTML("afterbegin", "<a class='btn btn-primary' href='login.php' role='button'>Login</a>")</script>
+					<script>document.getElementById("myModalOutput").innerHTML = "<?php echo $_SESSION["modalEmail"]; ?> Successfuly Registered"</script>
+					<script>myModal.show()</script>
 
 					<?php 
 				}
 				else {
 					?>
-					<script>document.getElementById("modalRegisterOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"</script>
-					<script>modalRegister.show()</script>
+					<script>document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"</script>
+					<script>myModal.show()</script>
 					<?php 
 				}
 				$connection->close();
