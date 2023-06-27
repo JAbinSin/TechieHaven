@@ -31,6 +31,34 @@
         <!-- Include the navigation bar to the webpage -->
         <?php include_once("../inc/navBar.php"); ?>
 
-        
+        <!-- Container for the whole list of categories -->
+        <div class="container p-3 mb-2 bg-normal-92 text-white rounded-3">
+            <h1 class="text-center mb-2 text-white">Home</h1>
+            <div class="row row-cols-1 row-cols-md-3 g-4 text-center justify-content-md-center">
+                <?php
+                    //Query and Execute for the user information
+                    $sqlQuery = "SELECT * FROM tbl_category ORDER BY CASE category_name WHEN 'All' THEN 1 ELSE 2 END;";
+                    $sqlQueryResult = $connection->query($sqlQuery);
+                    while($categoryData = $sqlQueryResult->fetch_assoc()){
+                        $categoryName = $categoryData['category_name'];
+                        $categoryPicture = $categoryData['category_picture'];
+                        echo "
+                        <div class='card mb-3 ms-2 border border-secondary border-3 card-color category-card p-0'>
+                            <div class='row g-0'>
+                                <div class='col-md-5 d-flex align-items-center'>
+                                  <a href='itemList.php?category=$categoryName'><img class='img-fluid category-card-img border-end border-3 border-secondary' src='../img/category/$categoryPicture' alt='Image Unavailable'></a>
+                                </div>
+                                <div class='col-md-7 d-flex align-items-center'>
+                                  <div class='card-body text-wrap text-break'>
+                                    <h1 class='card-title line-clamp-category p-1'><a href='itemList.php?category=$categoryName' class='text-reset text-decoration-none'>$categoryName</a></h1>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                        ";
+                    }
+                ?>
+            </div>
+        </div>
     </body>
 </html>

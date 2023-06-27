@@ -11,7 +11,7 @@
       if($_SESSION['userType'] == "admin") {
         echo "
           <div class='container-fluid'>
-            <a class='navbar-brand ms-4' href='itemList.php'>
+            <a class='navbar-brand ms-4' href='home.php'>
               <img src='../img/logo/logo-test.jpg' alt='TechieHaven Logo' width='30' height='inherit' class='d-inline-block align-text-top'>
               TechieHaven
             </a>
@@ -35,7 +35,7 @@
                     <li><hr class='dropdown-divider'></li>
                     <li><a class='dropdown-item' href='addItem.php'><i class='bi bi-bag-plus'></i> Add Item</a></li>
                     <li><hr class='dropdown-divider'></li>
-                    <li><a class='dropdown-item' href='addCategory.php'><i class='bi bi-folder-plus'></i> Add Category</a></li>
+                    <li><a class='dropdown-item' href='add-category.php'><i class='bi bi-folder-plus'></i> Add Category</a></li>
                     <li><a class='dropdown-item' href='categorySelector.php?op=edit'><i class='bi bi-pencil-square'></i> Edit Category</a></li>
                     <li><a class='dropdown-item' href='categorySelector.php?op=delete'><i class='bi bi-trash'></i> Delete Category</a></li>
                   </ul>
@@ -62,7 +62,7 @@
         //This is the navbar for the CLIENT
         echo "
           <div class='container-fluid'>
-            <a class='navbar-brand ms-4' href='itemList.php'>
+            <a class='navbar-brand ms-4' href='home.php'>
               <img src='../img/logo/logo-test.jpg' alt='TechieHaven Logo' width='30' height='inherit' class='d-inline-block align-text-top'>
               TechieHaven
             </a>
@@ -100,7 +100,7 @@
       //This is the navbar for the guest or unsign user
       echo "
         <div class='container-fluid'>
-        <a class='navbar-brand ms-4' href='itemList.php'>
+        <a class='navbar-brand ms-4' href='home.php'>
           <img src='../img/logo/logo-test.jpg' alt='TechieHaven Logo' width='30' height='inherit' class='d-inline-block align-text-top'>
           TechieHaven
         </a>
