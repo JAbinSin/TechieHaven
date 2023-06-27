@@ -191,7 +191,7 @@
                 }
             } else {
                 // Reset all the inputs on the 1st run of the program
-                $idd = $userData['id'];
+                $id = $userData['id'];
                 $fName = $userData['first_name'];
                 $lName = $userData['last_name'];
                 $mName = $userData['middle_name'];
