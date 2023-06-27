@@ -10,7 +10,7 @@
 
     //Set the id from url or session
     $type = $_SESSION['userType'];
-    @$id = $_GET["id"];
+    @$id = $_GET['id'];
     if(empty($id)) {
         $id = $_SESSION['userId'];
     }
@@ -77,7 +77,7 @@
         <div class="container p-3 mb-2 text-white w-75 overflow-auto">
             <div class="row justify-content-center text-break">
                 <?php
-                    if($_SESSION["userType"] == "admin") {
+                    if($_SESSION['userType'] == "admin") {
                         echo "
                             <div class='col-11 text-center border-end-0 bg-dark'>
                                 <h1 class='text-end pe-3 pt-1'><a href='#' class='text-reset text-decoration-none' onclick='window.history.go(-1); return false;'><i class='bi bi-arrow-counterclockwise'></i>Back</a></h1>

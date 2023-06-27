@@ -63,7 +63,7 @@
 			}
 			
 			if(!$email) 
-				$error["email"] = "Invalid Email Address";
+				$error['email'] = "Invalid Email Address";
 
 			// Query to select the user
 			$sqlQuery = "SELECT * FROM tbl_users WHERE email = '$email'";
@@ -112,7 +112,7 @@
 						if(isset($error['email'])) {
 							echo "
 								<div class='invalid-feedback'>
-								" . $error["email"] . "
+								" . $error['email'] . "
 								</div>
 							";
 						}
@@ -125,7 +125,7 @@
 						if(isset($error['password'])) {
 							echo "
 								<div class='invalid-feedback'>
-								" . $error["password"] . "
+								" . $error['password'] . "
 								</div>
 							";
 						}
@@ -133,7 +133,7 @@
 				</div>
 				<div class="col text-center">
 					<button type="submit" name="login" class="btn btn-secondary mb-3 rounded-pill shadow-lg">Login</button>
-					<p class="m-0">No Account? <a href="signup.php" <?php $_SESSION['firstRun'] = true; ?>>Register</a></p>
+					<p class="m-0">No Account? <a href="register.php" <?php $_SESSION['firstRun'] = true; ?>>Register</a></p>
 				</div>
 			</form>
 		</div>

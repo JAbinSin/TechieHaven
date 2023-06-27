@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <?php
     //Check for the quantity of the cart
-    $cartQuantity = isset($_SESSION["cartItemId"]) ? count($_SESSION["cartItemId"]) : 0;
+    $cartQuantity = isset($_SESSION['cartItemId']) ? count($_SESSION['cartItemId']) : 0;
 
     //Check the SESSION of what type of user is currently signed in
     if(isset($_SESSION['userType'])) {
@@ -36,8 +36,8 @@
                     <li><a class='dropdown-item' href='addItem.php'><i class='bi bi-bag-plus'></i> Add Item</a></li>
                     <li><hr class='dropdown-divider'></li>
                     <li><a class='dropdown-item' href='add-category.php'><i class='bi bi-folder-plus'></i> Add Category</a></li>
-                    <li><a class='dropdown-item' href='categorySelector.php?op=edit'><i class='bi bi-pencil-square'></i> Edit Category</a></li>
-                    <li><a class='dropdown-item' href='categorySelector.php?op=delete'><i class='bi bi-trash'></i> Delete Category</a></li>
+                    <li><a class='dropdown-item' href='select-category.php?op=edit'><i class='bi bi-pencil-square'></i> Edit Category</a></li>
+                    <li><a class='dropdown-item' href='select-category.php?op=delete'><i class='bi bi-trash'></i> Delete Category</a></li>
                   </ul>
                 </li>
                 <li class='nav-item dropdown'>

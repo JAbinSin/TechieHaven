@@ -77,13 +77,13 @@
 			$cellphoneNumber = filter_var($cellphoneNumber, FILTER_SANITIZE_NUMBER_INT);
 			$hashedPassword = sha1($password);
 
-			$_SESSION["modalEmail"] = $email;
+			$_SESSION['modalEmail'] = $email;
 
 			// For the Error Messages
 			$userInputs = array("fName" => $fName, "mName" => $mName, "lName" => $lName, "email" => $email, "password" => $password, "confirmPassword" => $confirmPassword, "address" => $address, "city" => $city, "region" => $region, "zipCode" => $zipCode, "cellphoneNumber" => $cellphoneNumber);
 
 			if(!($password === $confirmPassword))
-				$error["password"] = $error["confirmPassword"] = "Does not Match";
+				$error['password'] = $error['confirmPassword'] = "Does not Match";
 
 			foreach($userInputs as $k => $v) {
 				if(empty($v)) 
@@ -91,14 +91,14 @@
 			}
 			
 			if(!$email) 
-				$error["email"] = "Invalid Email Address";
+				$error['email'] = "Invalid Email Address";
 
 
 			// Query to find if the Email already exist
 			$sqlQuery = "SELECT email FROM tbl_users WHERE email = '$email'";
 			$sqlQueryResult = $connection->query($sqlQuery);
 			if($sqlQueryResult->num_rows > 0)  
-				$error["email"] = "Email Already Exist";
+				$error['email'] = "Email Already Exist";
 			?> 
 			
 
@@ -132,7 +132,7 @@
 
 					?>
 					<script>document.getElementById("myModalButtons").insertAdjacentHTML("afterbegin", "<a class='btn btn-primary' href='login.php' role='button'>Login</a>")</script>
-					<script>document.getElementById("myModalOutput").innerHTML = "<?php echo $_SESSION["modalEmail"]; ?> Successfuly Registered"</script>
+					<script>document.getElementById("myModalOutput").innerHTML = "<?php echo $_SESSION['modalEmail']; ?> Successfuly Registered"</script>
 					<script>myModal.show()</script>
 
 					<?php 
@@ -172,7 +172,7 @@
 						if(isset($error['fName'])) {
 							echo "
 								<div class='invalid-feedback'>
-								" . $error["fName"] . "
+								" . $error['fName'] . "
 								</div>
 							";
 						}
@@ -185,7 +185,7 @@
 						if(isset($error['mName'])) {
 							echo "
 								<div class='invalid-feedback'>
-								" . $error["mName"] . "
+								" . $error['mName'] . "
 								</div>
 							";
 						}
@@ -198,7 +198,7 @@
 						if(isset($error['lName'])) {
 							echo "
 								<div class='invalid-feedback'>
-								" . $error["lName"] . "
+								" . $error['lName'] . "
 								</div>
 							";
 						}
@@ -211,7 +211,7 @@
 						if(isset($error['email'])) {
 							echo "
 								<div class='invalid-feedback'>
-								" . $error["email"] . "
+								" . $error['email'] . "
 								</div>
 							";
 						}
@@ -224,7 +224,7 @@
 						if(isset($error['password'])) {
 							echo "
 								<div class='invalid-feedback'>
-								" . $error["password"] . "
+								" . $error['password'] . "
 								</div>
 							";
 						}
@@ -237,7 +237,7 @@
 						if(isset($error['confirmPassword'])) {
 							echo "
 								<div class='invalid-feedback'>
-								" . $error["confirmPassword"] . "
+								" . $error['confirmPassword'] . "
 								</div>
 							";
 						}
@@ -250,7 +250,7 @@
 						if(isset($error['address'])) {
 							echo "
 								<div class='invalid-feedback'>
-								" . $error["address"] . "
+								" . $error['address'] . "
 								</div>
 							";
 						}
@@ -263,7 +263,7 @@
 						if(isset($error['city'])) {
 							echo "
 								<div class='invalid-feedback'>
-								" . $error["city"] . "
+								" . $error['city'] . "
 								</div>
 							";
 						}
@@ -276,7 +276,7 @@
 						if(isset($error['region'])) {
 							echo "
 								<div class='invalid-feedback'>
-								" . $error["region"] . "
+								" . $error['region'] . "
 								</div>
 							";
 						}
@@ -289,7 +289,7 @@
 						if(isset($error['zipCode'])) {
 							echo "
 								<div class='invalid-feedback'>
-								" . $error["zipCode"] . "
+								" . $error['zipCode'] . "
 								</div>
 							";
 						}
@@ -302,7 +302,7 @@
 						if(isset($error['cellphoneNumber'])) {
 							echo "
 								<div class='invalid-feedback'>
-								" . $error["cellphoneNumber"] . "
+								" . $error['cellphoneNumber'] . "
 								</div>
 							";
 						}

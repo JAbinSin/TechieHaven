@@ -4,7 +4,7 @@
 
     //Check if the current session allowed the user to acces this site and redirect if not
     //Only the buyer can access this webpage
-    if(!($_SESSION["userType"] == "buyer")) {
+    if(!($_SESSION['userType'] == "buyer")) {
         header("Location: ../index.php");
     }
 
@@ -83,14 +83,14 @@
                 $cellphoneNumber = filter_var($cellphoneNumber, FILTER_SANITIZE_NUMBER_INT);
                 $hashedPassword = sha1($password);
 
-                $_SESSION["modalEmail"] = $email;
+                $_SESSION['modalEmail'] = $email;
                 $id = $_SESSION['userId'];
 
                 // For the Error Messages
                 $userInputs = array("fName" => $fName, "mName" => $mName, "lName" => $lName, "email" => $email, "password" => $password, "confirmPassword" => $confirmPassword, "address" => $address, "city" => $city, "region" => $region, "zipCode" => $zipCode, "cellphoneNumber" => $cellphoneNumber);
 
                 if(!($password === $confirmPassword))
-                    $error["password"] = $error["confirmPassword"] = "Does not Match";
+                    $error['password'] = $error['confirmPassword'] = "Does not Match";
 
                 foreach($userInputs as $k => $v) {
                     if(empty($v))
@@ -98,7 +98,7 @@
                 }
                 
                 if(!$email) 
-                    $error["email"] = "Invalid Email Address";
+                    $error['email'] = "Invalid Email Address";
 
 
                 //Check if the Email, and Phone Number already exist
@@ -106,30 +106,29 @@
                 $sqlQueryResult = $connection->query($sqlQuery);
 
                 while($userData = $sqlQueryResult->fetch_assoc()) {
-                    if(($email === $userData["email"]) && ($id != $userData["id"])) {
-                        $error["email"] = "Email Address Already Registered";
+                    if(($email === $userData['email']) && ($id != $userData['id'])) {
+                        $error['email'] = "Email Address Already Registered";
                     }
-                    if(($cellphoneNumber === $userData["phone_number"]) && ($id != $userData["id"])) {
-                        $error["cellphone_number"] = "Cellphone Number Already Registered";
+                    if(($cellphoneNumber === $userData['phone_number']) && ($id != $userData['id'])) {
+                        $error['cellphone_number'] = "Cellphone Number Already Registered";
                     }
                 }
 
-                // File Image Validation s
+                // File Image Validations
                 $uploadedImage = false;
 
-				if($_FILES["profilePicture"]["error"] == 4){
-                    ?>
-
-					<script>document.getElementById("myModalOutput").innerHTML = "File Uploaded is not an Image Format / Empty."</script>
-					<script>myModal.show()</script>
-
-                    <?php
+				if($_FILES['profilePicture']['error'] == 4){
+                    $uploadedImage = false;
 				} else {
 					//Check if the file type is an image format and if the user upload an image or not
 					//Add an exception so it would not check an empty upload
-					if((@exif_imagetype($_FILES["profilePicture"]['tmp_name']) == false) && (@!empty($_FILES["profilePicture"]['tmp_name']))) {
-						echo "<script>myModal.show()</script>";
-					} else if(@empty(exif_imagetype($_FILES["profilePicture"]['tmp_name']))) {
+					if((@exif_imagetype($_FILES['profilePicture']['tmp_name']) == false) && (@!empty($_FILES['profilePicture']['tmp_name']))) {
+                        $error['profilePicture'] = "File Uploaded is not an Image Format / Empty.";
+                        ?>
+                        <script>document.getElementById("myModalOutput").innerHTML = "File Uploaded is not an Image Format / Empty."</script>
+                        <script>myModal.show()</script>
+                        <?php
+					} elseif(@empty(exif_imagetype($_FILES['profilePicture']['tmp_name']))) {
 						$uploadedImage = false;
 					} else {
 						$uploadedImage = true;
@@ -143,25 +142,25 @@
                         $_SESSION[$k] = $v;
                     }
                     
-                    //Select the profile image then delete the old profile
+                    //Select the profile picture then delete the old profile picture
                     $queryProfile = "SELECT profile_picture FROM tbl_users WHERE id = '$id'";
                     $queryProfileResult = $connection->query($queryProfile);
                     $profileResult = $queryProfileResult->fetch_assoc();
-                    $path = "../img/profile/" . $profileResult["profile_picture"];
+                    $path = "../img/profile/" . $profileResult['profile_picture'];
 
                     //Delete the profile picture if they change from an image that is not a default
                     //Also stop the user from being able to delete the default profile
-                    if(($profileResult["profile_picture"] != "default.png") && ($uploadedImage == true)) {
+                    if(($profileResult['profile_picture'] != "default.png") && ($uploadedImage == true)) {
                         unlink($path);
                     }
 
                     //Moving and naming the img to img/profile folder
                     if($uploadedImage == true) {
                         $target_dir = "../img/profile/";
-                        @$fileType = pathinfo($_FILES["profilePicture"]["name"])["extension"];
+                        @$fileType = pathinfo($_FILES['profilePicture']['name'])['extension'];
                         $fileName = $id . "_profile." . $fileType;
                         $target_file = $target_dir . $fileName;
-                        move_uploaded_file($_FILES["profilePicture"]["tmp_name"], $target_file);
+                        move_uploaded_file($_FILES['profilePicture']['tmp_name'], $target_file);
                     }
                     
                     if($uploadedImage == true){
@@ -175,7 +174,7 @@
                     if($sqlUpdateResult) {
 
                         ?>
-                        <script>document.getElementById("myModalOutput").innerHTML = "<?php echo $_SESSION["modalEmail"]; ?> Successfuly Updated"</script>
+                        <script>document.getElementById("myModalOutput").innerHTML = "<?php echo $_SESSION['modalEmail']; ?> Successfuly Updated"</script>
                         <script>document.getElementById("myModalButtons").insertAdjacentHTML("afterbegin", "<a class='btn btn-primary' href='profile.php' role='button'>Profile</a>")</script>
                         <script>myModal.show()</script>
 
@@ -215,7 +214,7 @@
 						if(isset($error['profilePicture'])) {
 							echo "
 								<div class='invalid-feedback'>
-								" . $error["profilePicture"] . "
+								" . $error['profilePicture'] . "
 								</div>
 							";
 						}
@@ -228,7 +227,7 @@
 						if(isset($error['fName'])) {
 							echo "
 								<div class='invalid-feedback'>
-								" . $error["fName"] . "
+								" . $error['fName'] . "
 								</div>
 							";
 						}
@@ -241,7 +240,7 @@
 						if(isset($error['mName'])) {
 							echo "
 								<div class='invalid-feedback'>
-								" . $error["mName"] . "
+								" . $error['mName'] . "
 								</div>
 							";
 						}
@@ -254,7 +253,7 @@
 						if(isset($error['lName'])) {
 							echo "
 								<div class='invalid-feedback'>
-								" . $error["lName"] . "
+								" . $error['lName'] . "
 								</div>
 							";
 						}
@@ -267,7 +266,7 @@
 						if(isset($error['email'])) {
 							echo "
 								<div class='invalid-feedback'>
-								" . $error["email"] . "
+								" . $error['email'] . "
 								</div>
 							";
 						}
@@ -280,7 +279,7 @@
 						if(isset($error['password'])) {
 							echo "
 								<div class='invalid-feedback'>
-								" . $error["password"] . "
+								" . $error['password'] . "
 								</div>
 							";
 						}
@@ -293,7 +292,7 @@
 						if(isset($error['confirmPassword'])) {
 							echo "
 								<div class='invalid-feedback'>
-								" . $error["confirmPassword"] . "
+								" . $error['confirmPassword'] . "
 								</div>
 							";
 						}
@@ -306,7 +305,7 @@
 						if(isset($error['address'])) {
 							echo "
 								<div class='invalid-feedback'>
-								" . $error["address"] . "
+								" . $error['address'] . "
 								</div>
 							";
 						}
@@ -319,7 +318,7 @@
 						if(isset($error['city'])) {
 							echo "
 								<div class='invalid-feedback'>
-								" . $error["city"] . "
+								" . $error['city'] . "
 								</div>
 							";
 						}
@@ -332,7 +331,7 @@
 						if(isset($error['region'])) {
 							echo "
 								<div class='invalid-feedback'>
-								" . $error["region"] . "
+								" . $error['region'] . "
 								</div>
 							";
 						}
@@ -345,7 +344,7 @@
 						if(isset($error['zipCode'])) {
 							echo "
 								<div class='invalid-feedback'>
-								" . $error["zipCode"] . "
+								" . $error['zipCode'] . "
 								</div>
 							";
 						}
@@ -358,7 +357,7 @@
 						if(isset($error['cellphoneNumber'])) {
 							echo "
 								<div class='invalid-feedback'>
-								" . $error["cellphoneNumber"] . "
+								" . $error['cellphoneNumber'] . "
 								</div>
 							";
 						}
