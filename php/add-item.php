@@ -227,7 +227,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="itemDescription" class="form-label">Item Description</label>
-                    <textarea class="form-control bg-dark text-light <?php echo $_SESSION['firstRun'] ? "" : (isset($error['itemDescription']) ? "is-invalid": "is-valid");?>" rows="3" name="itemDescription" style="max-height: 15rem;" required><?php echo $itemDescription?></textarea>
+                    <textarea class="form-control bg-dark text-light <?php echo $_SESSION['firstRun'] ? "" : (isset($error['itemDescription']) ? "is-invalid": "is-valid");?>" rows="3" name="itemDescription" style="max-height: 15rem;" placeholder="<?php echo $itemDescription?>" required><?php echo $itemDescription?></textarea>
                     <?php 
                         if(isset($error['itemDescription'])) {
                             echo "
