@@ -2,6 +2,11 @@
     //Include the database to the webpage to access it
     include_once("../inc/database.php");
 
+    //Check if the current user is allowed to access the webpage
+    //Only the admin can access this webpage
+    if($_SESSION['userType'] != "admin") {
+        header("Location: ../index.php");
+    }
 ?>
 
 <!doctype html>
@@ -32,7 +37,7 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <?php
-            // This is for the Update validation
+            // This is for the Add validation
             $_SESSION['firstRun'] = true;
 
             // If the User Click the Register Button

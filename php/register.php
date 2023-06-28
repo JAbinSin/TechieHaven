@@ -308,7 +308,7 @@
 						}
 					?>
 				</div>
-				<input type="hidden" name="userType" value="buyer">
+				<input type="hidden" name="userType" value="customer">
 				<div class="col text-center">
 					<button type="submit" name="register" class="btn btn-secondary mb-3 rounded-pill shadow-lg">Register</button>
 					<p class="m-0">Already have an account? <a href="login.php" <?php $_SESSION['firstRun'] = true; ?>>Login now</a></p>

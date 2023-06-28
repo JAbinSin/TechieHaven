@@ -3,8 +3,8 @@
     include_once("../inc/database.php");
 
     //Check if the current session allowed the user to acces this site and redirect if not
-    //Only the buyer can access this webpage
-    if(!($_SESSION['userType'] == "buyer")) {
+    //Only the customer can access this webpage
+    if(!($_SESSION['userType'] == "customer")) {
         header("Location: ../index.php");
     }
 

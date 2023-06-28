@@ -37,7 +37,7 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <?php
-            // If the User Click the Register Button
+            // If the User Click the Edit Button
             if(isset($_POST['edit'])) {
                 include_once("../modals/modalForm.php");
                 $categoryName = $_POST['edit'];
@@ -93,6 +93,8 @@
                 //Ready the query and execute it to delete the category
                 $deleteQuery = "DELETE FROM tbl_category WHERE category_name = '$categoryName'";
                 $deleteCategory = $connection->query($deleteQuery);
+                
+                
             } elseif(isset($_POST['edit-action'])) {
                 include_once("../modals/modal.php");
 

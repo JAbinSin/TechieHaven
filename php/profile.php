@@ -3,7 +3,7 @@
     include_once("../inc/database.php");
 
     //Check if the current user is allowed to access the webpage
-    //Only the admin and buyer can access this webpage
+    //Only the admin and customer can access this webpage
     if(!isset($_SESSION['userType'])) {
         header("Location: ../index.php");
     }
