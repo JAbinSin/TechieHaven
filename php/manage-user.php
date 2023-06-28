@@ -108,16 +108,16 @@
 
                         //Query for users in the tbl_users
                         $sqlQuery = "SELECT DISTINCT tbl_users.* FROM tbl_users LEFT JOIN tbl_history ON tbl_users.id = tbl_history.user_id ORDER BY CASE
-                                                    WHEN tbl_users.user_type = 'admin' AND tbl_history.order_id > 0 THEN 1
-                                                    WHEN tbl_users.user_type = 'admin' AND tbl_history.order_id IS NULL THEN 2
-                                                    WHEN tbl_users.user_type = 'customer' AND tbl_history.order_id > 0 THEN 3
-                                                    WHEN tbl_users.user_type = 'customer' AND tbl_history.order_id IS NULL THEN 4
+                                                    WHEN tbl_users.user_type = 'admin' AND tbl_history.id > 0 THEN 1
+                                                    WHEN tbl_users.user_type = 'admin' AND tbl_history.id IS NULL THEN 2
+                                                    WHEN tbl_users.user_type = 'customer' AND tbl_history.id > 0 THEN 3
+                                                    WHEN tbl_users.user_type = 'customer' AND tbl_history.id IS NULL THEN 4
                                                     ELSE 5
                                                 END";
                         $sqlQueryResult = $connection->query($sqlQuery);
 
                         //This is a loop for table body list
-                        while($userData = $sqlQueryResult->fetch_assoc()){
+                        while($userData = $sqlQueryResult->fetch_assoc()) {
                             echo "
                             <tr>
                                 <td>
@@ -141,7 +141,7 @@
 
                                 $userId = $userData['id'];
 
-                                $queryHistory = "SELECT count(DISTINCT order_id) AS number FROM tbl_history WHERE (user_id = $userId) AND (status = 'pending' OR status = 'processing')";
+                                $queryHistory = "SELECT count(DISTINCT id) AS number FROM tbl_history WHERE (user_id = $userId) AND (status = 'pending' OR status = 'processing')";
                                 $queryHistoryResult = $connection->query($queryHistory);
                                 $queryHistoryResultFetch = $queryHistoryResult->fetch_assoc();
                                 @$orderNumber = $queryHistoryResultFetch["number"];
