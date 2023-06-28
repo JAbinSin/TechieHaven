@@ -29,7 +29,7 @@
 
     <body class="d-grid gap-5 bg-secondary">
         <!-- Include the navigation bar to the webpage -->
-        <?php include_once("../inc/navBar.php"); ?>
+        <?php include("../inc/navBar.php"); ?>
 
         <!-- Container for the whole list of categories -->
         <div class="container p-3 mb-2 bg-normal-92 text-white rounded-3">

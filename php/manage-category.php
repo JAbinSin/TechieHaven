@@ -34,7 +34,7 @@
 
     <body class="d-grid gap-5 bg-secondary">
         <!-- Include the navigation bar to the webpage -->
-        <?php include_once("../inc/navBar.php"); ?>
+        <?php include("../inc/navBar.php"); ?>
 
         <?php
             // If the User Click the Edit Button

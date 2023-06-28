@@ -50,7 +50,57 @@
 
     <body class="d-grid gap-5 bg-secondary">
         <!-- Include the navigation bar to the webpage -->
-        <?php include_once("../inc/navBar.php"); ?>
+        <?php include("../inc/navBar.php"); ?>
+
+        <?php
+            // If the Customer Click the Add to Cart Button
+            if(isset($_POST['add'])) {
+                include("../modals/modal.php");
+
+                // Validate the Inputs
+                // Trim the Inputs
+                $itemQuantity = trim($_POST["itemQuantity"]);
+
+                // Remove PHP and HTML tags
+                $itemQuantity = htmlspecialchars(strip_tags($itemQuantity));
+
+                //Sanitize all the Inputs
+                $itemQuantity =  filter_var($itemQuantity, FILTER_SANITIZE_NUMBER_INT);
+
+                // For the Error Messages
+                $userInputs = array("itemQuantity" => $itemQuantity);
+
+                foreach($userInputs as $k => $v) {
+                    if(empty($v))
+                        $error[$k] = "Please provide a valid input";
+                }
+                
+                // Update if no Error found
+                if(empty($error)) {
+                    // Get the current session id
+                    $customerId = $_SESSION['userId']; 
+                    $sqlInsert = "INSERT INTO tbl_cart(user_id, item_id, quantity) VALUES ('$customerId', '$itemId', '$itemQuantity')";
+                    $sqlInsertResult = $connection->query($sqlInsert);
+
+                    if($sqlInsertResult) {
+
+                        ?>
+                        <script>document.getElementById("myModalOutput").innerHTML = "<?php echo $itemName; ?> Successfuly Added to the Cart. <br> Quantity: <?php echo $itemQuantity; ?>"</script>
+                        <script>myModal.show()</script>
+                        <?php 
+                    }
+                    else {
+                        ?>
+                        <script>document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"</script>
+                        <script>myModal.show()</script>
+                        <?php 
+                    }
+                }
+            } else {
+                // Reset all the inputs on the 1st run of the program
+                $itemQuantity = 1;
+            }
+        ?>
 
         <!-- Container for the item details -->
         <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-50 opacity-1">
@@ -84,18 +134,18 @@
                                 //Only the admin and client can see the Add to cart button and the Quantity Input
                                 if((@$_SESSION["userType"] == "admin") || (@$_SESSION["userType"] == "customer")) {
                                     echo"
-                                        <form action='itemHandler.php' method='post'>
+                                        <form action='' method='post'>
                                             <div class='row mt-4'>
                                                 <label for='itemQuantity' class='col-sm-3 col-form-label h5'>Item Quantity:</label>
                                                 <div class='quantity '>
                                                     <div class='btn dec'>-</div>
-                                                    <input class='quantity-input bg-dark h5' type='number' id='0' name='itemQuantity' value='1' step='1' min='1' max='99' pattern='/^-?\d+\.?\d*$/' onKeyPress='if(this.value.length==2) return false;' onkeypress='return event.charCode >= 48 && event.charCode <= 57' title='Item Quantity' required>
+                                                    <input class='quantity-input bg-dark h5' type='number' id='0' name='itemQuantity' value='{$itemQuantity}' step='1' min='1' max='99' pattern='/^-?\d+\.?\d*$/' onKeyPress='if(this.value.length==2) return false;' onkeypress='return event.charCode >= 48 && event.charCode <= 57' title='Item Quantity' required>
                                                     <div class='btn inc'>+</div>
                                                 </div>
                                             </div>
                                             <div>
                                                 <input type='hidden' name='itemId' value='$itemId'>
-                                                <button type='submit' class='btn btn-primary mt-2'><i class='bi bi-cart-plus'></i> Add to Cart</button>
+                                                <button type='submit' name='add' class='btn btn-primary mt-2'><i class='bi bi-cart-plus'></i> Add to Cart</button>
                                             </div>
                                         </form>
                                     ";
@@ -104,7 +154,7 @@
                                         <div class='row mt-4'>
                                             <label for='itemQuantity' class='col-sm-3 col-form-label h5'>Item Quantity:</label>
                                             <div class='col-sm-1'>
-                                                <input type='number' class='form-control text-light bg-dark' style='width: 4rem;' name='itemQuantity' value='1' disabled>
+                                                <input type='number' class='form-control text-light bg-dark' style='width: 4rem;' name='itemQuantity' value='{$itemQuantity}' disabled>
                                             </div>
                                         </div>
                                         <div>

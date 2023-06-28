@@ -34,7 +34,7 @@
 
     <body class="d-grid gap-5 bg-secondary">
         <!-- Include the navigation bar to the webpage -->
-        <?php include_once("../inc/navBar.php"); ?>
+        <?php include("../inc/navBar.php"); ?>
 
         <?php
             // This is for the Add validation
@@ -146,7 +146,7 @@
                 $itemDescription = "";
                 $itemCategory = "";
             }
-            ?>
+        ?>
 
         <!-- Container for the input form of the add item -->
         <div class="container p-3 mb-2 bg-normal-92 text-white rounded-3 w-25">

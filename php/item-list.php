@@ -39,7 +39,7 @@
 
     <body class="d-grid gap-5 bg-secondary">
         <!-- Include the navigation bar to the webpage -->
-        <?php include_once("../inc/navBar.php"); ?>
+        <?php include("../inc/navBar.php"); ?>
 
         <?php
             // If the User Click the Edit Button
@@ -124,14 +124,6 @@
             } elseif(isset($_POST['delete-action'])) {
                 $itemId = $_POST['delete-action'];
                 
-                //Use to delete the picture from the img/category folder
-                //Run this first before deleting the whole column from the table
-                $queryProfile = "SELECT item_picture FROM tbl_items WHERE id = '$itemId'";
-                $queryProfileResult = $connection->query($queryProfile);
-                $profileResult = $queryProfileResult->fetch_assoc();
-                $path = "../img/items/" . $profileResult['item_picture'];
-                unlink($path);
-
                 //Ready the query and execute it to delete the category
                 $deleteQuery = "DELETE FROM tbl_items WHERE id = '$itemId'";
                 $deleteCategory = $connection->query($deleteQuery);

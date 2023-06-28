@@ -1,11 +1,16 @@
 <!-- This is the navigation bar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <?php
-    //Check for the quantity of the cart
-    $cartQuantity = isset($_SESSION['cartItemId']) ? count($_SESSION['cartItemId']) : 0;
 
     //Check the SESSION of what type of user is currently signed in
     if(isset($_SESSION['userType'])) {
+      //Check for the quantity of the cart
+      $cartQuantity = isset($_SESSION['cartItemId']) ? count($_SESSION['cartItemId']) : 0;
+      $userId = $_SESSION['userId'];
+      $queryCart = "SELECT count(user_id) AS number FROM tbl_cart WHERE user_id = $userId";
+      $queryCartResult = $connection->query($queryCart);
+      $queryCartResultFetch = $queryCartResult->fetch_assoc();
+      $cartQuantity = $queryCartResultFetch["number"];
 
       //This is the navbar for the ADMIN
       if($_SESSION['userType'] == "admin") {
@@ -44,7 +49,7 @@
                     Items
                   </a>
                   <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='navbarDropdown'>
-                    <li><a class='dropdown-item' href='cart.php'><i class='bi bi-cart'></i> Cart <span class='badge bg-secondary'>$cartQuantity</span></a></li>
+                    <li><a class='dropdown-item' href='cart.php'><i class='bi bi-cart'></i> Cart <span class='badge bg-secondary'><?php echo $cartQuantity ?></span></a></li>
                     <li><a class='dropdown-item' href='history.php'><i class='bi bi-bookmarks'></i> History</a></li>
                   </ul>
                 </li>
@@ -81,7 +86,7 @@
                     Items
                   </a>
                   <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='navbarDropdown'>
-                    <li><a class='dropdown-item' href='cart.php'><i class='bi bi-cart'></i> Cart <span class='badge bg-secondary'>$cartQuantity</span></a></li>
+                    <li><a class='dropdown-item' href='cart.php'><i class='bi bi-cart'></i> Cart <span class='badge bg-secondary'><?php echo $cartQuantity ?></span></a></li>
                     <li><a class='dropdown-item' href='history.php'><i class='bi bi-bookmarks'></i> History</a></li>
                   </ul>
                 </li>
