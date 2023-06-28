@@ -75,7 +75,7 @@
                 }
                 header("Location: ");
             } elseif(isset($_POST['btnRemove'])) {
-                include_once("../modals/modal.php");
+                include("../modals/modal.php");
 
                 $cartId = $_POST['btnRemove'];
                 $sqlQuery = "SELECT * FROM tbl_cart INNER JOIN tbl_items ON tbl_cart.item_id = tbl_items.id WHERE tbl_cart.id = $cartId";
@@ -99,10 +99,85 @@
             } elseif(isset($_POST['delete-action'])) {
                 $cartId = $_POST['delete-action'];
 
-                //Ready the query and execute it to delete the category
+                //Ready the query and execute it to delete the cart
                 $deleteQuery = "DELETE FROM tbl_cart WHERE id = '$cartId'";
                 $deleteCategory = $connection->query($deleteQuery);
                 header("Location: ");
+            } elseif(isset($_POST['btnClear'])) {
+                include("../modals/modal.php");
+                ?>
+
+                <script>
+                    document.getElementById("myModalLabelh5").innerHTML = "Clear Cart"
+                    document.getElementById("myModalOutput").innerHTML = "Are you Sure you want to Clear your Cart?"
+                    document.getElementById("myModalButtons").innerHTML = ""
+                    document.getElementById("myModalButtons").insertAdjacentHTML("afterbegin", "<form action='' method='post' id='myModalForm'>")
+                    document.getElementById("myModalForm").insertAdjacentHTML("beforeend", "<button type='submit' name='clear-action' class='btn btn-danger me-2' value='Yes'>Yes</button>")
+                    document.getElementById("myModalForm").insertAdjacentHTML("beforeend", "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>No</button>")
+                    myModal.show()
+                </script>
+
+                <?php
+
+            } elseif(isset($_POST['clear-action'])) {
+                $userId = $_SESSION['userId'];
+
+                //Ready the query and execute it to delete the cart
+                $deleteQuery = "DELETE FROM tbl_cart WHERE user_id = '$userId'";
+                $deleteCategory = $connection->query($deleteQuery);
+                header("Location: ");
+            } elseif(isset($_POST['btnBuy'])) {
+                include("../modals/modal.php");
+                ?>
+
+                <script>
+                    document.getElementById("myModalLabelh5").innerHTML = "Buy Cart"
+                    document.getElementById("myModalOutput").innerHTML = "Are you Sure you want to Buy all the item in the Cart?"
+                    document.getElementById("myModalButtons").innerHTML = ""
+                    document.getElementById("myModalButtons").insertAdjacentHTML("afterbegin", "<form action='' method='post' id='myModalForm'>")
+                    document.getElementById("myModalForm").insertAdjacentHTML("beforeend", "<button type='submit' name='buy-action' class='btn btn-success me-2' value='Yes'>Yes</button>")
+                    document.getElementById("myModalForm").insertAdjacentHTML("beforeend", "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>No</button>")
+                    myModal.show()
+                </script>
+
+                <?php
+            } elseif(isset($_POST['buy-action'])) {
+                $userId = $_SESSION['userId'];
+                $itemStatus = "pending";
+                $errorCheck = false;
+
+                $queryCart = "SELECT * FROM tbl_cart INNER JOIN tbl_items ON tbl_cart.item_id = tbl_items.id WHERE tbl_cart.user_id = $userId";
+                $queryCartResult = $connection->query($queryCart);
+                while($cartData = $queryCartResult->fetch_assoc()) {
+                    $itemPrice = $cartData['item_price'];
+                    $itemPicture = $cartData['item_picture'];
+                    $itemName = $cartData['item_name'];
+                    $itemId = $cartData['item_id'];
+                    $itemQuantity = $cartData['quantity'];
+                    $itemPrice = $cartData['item_price'];
+                    
+
+                    $sqlInsert = "INSERT INTO tbl_history(user_id, item_picture, item_name, item_id, item_quantity, item_price, status)
+                    VALUES('$userId', '$itemPicture', '$itemName', '$itemId', '$itemQuantity', '$itemPrice', '$itemStatus')";
+
+                    $sqlInsertResult = $connection->query($sqlInsert);
+
+                    if(!$sqlInsertResult) {
+                        $errorCheck = true;
+                        ?>
+                        <script>document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"</script>
+                        <script>myModal.show()</script>
+                        <?php 
+                    }
+                }
+                if(!$errorCheck) {
+                    $userId = $_SESSION['userId'];
+
+                    //Ready the query and execute it to delete the cart
+                    $deleteQuery = "DELETE FROM tbl_cart WHERE user_id = '$userId'";
+                    $deleteCategory = $connection->query($deleteQuery);
+                    header("Location: history.php");
+                }
             }
         ?>
 
@@ -209,10 +284,10 @@
             //If the cart is empty the option for Clear and Buy would not be visible/available
             if(!$cartQuantity < 1) {
                 echo "
-                    <form action='buy.php' method='post'>
+                    <form action='' method='post'>
                         <div class='col text-end me-5'>
-                            <input class='btn btn-primary btn-danger btn-lg mt-3' type='submit' name='btnSubmit' value='CLEAR'>
-                            <input class='btn btn-primary btn-primary btn-lg mt-3 ms-3' type='submit' name='btnSubmit' value='BUY'>
+                            <button class='btn btn-primary btn-danger btn-lg mt-3 ms-3' type='submit' name='btnClear' value='CLEAR'>CLEAR</button>
+                            <button class='btn btn-primary btn-primary btn-lg mt-3 ms-3' type='submit' name='btnBuy' value='BUY'>BUY</button>
                         </div>
                     </form>
                 ";
