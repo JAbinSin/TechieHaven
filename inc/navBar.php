@@ -9,7 +9,7 @@
 
       //This is the navbar for the ADMIN
       if($_SESSION['userType'] == "admin") {
-        echo "
+      ?>
           <div class='container-fluid'>
             <a class='navbar-brand ms-4' href='home.php'>
               <img src='../img/logo/logo-test.jpg' alt='TechieHaven Logo' width='30' height='inherit' class='d-inline-block align-text-top'>
@@ -57,10 +57,10 @@
                 </li>
               </ul>
           </div>
-        ";
+      <?php
       } else {
         //This is the navbar for the CLIENT
-        echo "
+        ?>
           <div class='container-fluid'>
             <a class='navbar-brand ms-4' href='home.php'>
               <img src='../img/logo/logo-test.jpg' alt='TechieHaven Logo' width='30' height='inherit' class='d-inline-block align-text-top'>
@@ -94,11 +94,11 @@
                 </li>
               </ul>
           </div>
-        ";
+        <?php
       }
     } else {
       //This is the navbar for the guest or unsign user
-      echo "
+      ?>
         <div class='container-fluid'>
         <a class='navbar-brand ms-4' href='home.php'>
           <img src='../img/logo/logo-test.jpg' alt='TechieHaven Logo' width='30' height='inherit' class='d-inline-block align-text-top'>
@@ -123,7 +123,7 @@
               </li>
             </ul>
         </div>
-      ";
+      <?php
     }
   ?>
 </nav>
