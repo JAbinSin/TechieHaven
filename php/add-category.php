@@ -71,10 +71,6 @@
 					//Add an exception so it would not check an empty upload
 					if((@exif_imagetype($_FILES['categoryPicture']['tmp_name']) == false) && (@!empty($_FILES['categoryPicture']['tmp_name']))) {
 						$error['categoryPicture'] = "File Uploaded is not an Image Format / Empty.";
-                        ?>
-                        <script>document.getElementById("myModalOutput").innerHTML = "File Uploaded is not an Image Format / Empty."</script>
-                        <script>myModal.show()</script>
-                        <?php
 					} else if(@empty(exif_imagetype($_FILES['categoryPicture']['tmp_name']))) {
 						$uploadedImage = false;
 					} else {

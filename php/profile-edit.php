@@ -124,10 +124,6 @@
 					//Add an exception so it would not check an empty upload
 					if((@exif_imagetype($_FILES['profilePicture']['tmp_name']) == false) && (@!empty($_FILES['profilePicture']['tmp_name']))) {
                         $error['profilePicture'] = "File Uploaded is not an Image Format / Empty.";
-                        ?>
-                        <script>document.getElementById("myModalOutput").innerHTML = "File Uploaded is not an Image Format / Empty."</script>
-                        <script>myModal.show()</script>
-                        <?php
 					} elseif(@empty(exif_imagetype($_FILES['profilePicture']['tmp_name']))) {
 						$uploadedImage = false;
 					} else {
@@ -222,7 +218,7 @@
                 </div>
                 <div class="mb-3">
 					<label for="fName" class="form-label">First Name</label>
-					<input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['fName']) ? "is-invalid": "is-valid");?>" name="fName" placeholder="Enter First Name" pattern="[A-zÀ-ž\s]+" value="<?php echo $fName?>" required>
+					<input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['fName']) ? "is-invalid": "is-valid");?>" name="fName" placeholder="<?php echo $fName?>" pattern="[A-zÀ-ž\s]+" value="<?php echo $fName?>" required>
 					<?php 
 						if(isset($error['fName'])) {
 							echo "
@@ -235,7 +231,7 @@
 				</div>
 				<div class="mb-3">
 					<label for="mName" class="form-label">Middle Name</label>
-					<input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['mName']) ? "is-invalid": "is-valid");?>" name="mName" placeholder="Enter Middle Name" pattern="[A-zÀ-ž\s]+" value="<?php echo $mName?>" required>
+					<input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['mName']) ? "is-invalid": "is-valid");?>" name="mName" placeholder="<?php echo $mName?>" pattern="[A-zÀ-ž\s]+" value="<?php echo $mName?>" required>
 					<?php 
 						if(isset($error['mName'])) {
 							echo "
@@ -248,7 +244,7 @@
 				</div>
 				<div class="mb-3">
 					<label for="mName" class="form-label">Last Name</label>
-					<input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['lName']) ? "is-invalid": "is-valid");?>" name="lName" placeholder="Enter Last Name" pattern="[A-zÀ-ž\s]+" value="<?php echo $lName?>" required>
+					<input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['lName']) ? "is-invalid": "is-valid");?>" name="lName" placeholder="<?php echo $lName?>" pattern="[A-zÀ-ž\s]+" value="<?php echo $lName?>" required>
 					<?php 
 						if(isset($error['lName'])) {
 							echo "
@@ -261,7 +257,7 @@
 				</div>
 				<div class="mb-3">
 					<label for="email" class="form-label">Email</label>
-					<input type="email" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['email']) ? "is-invalid": "is-valid");?>" name="email" placeholder="Enter Email" value="<?php echo $email?>" required>
+					<input type="email" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['email']) ? "is-invalid": "is-valid");?>" name="email" placeholder="<?php echo $email?>" value="<?php echo $email?>" required>
 					<?php 
 						if(isset($error['email'])) {
 							echo "
@@ -300,7 +296,7 @@
 				</div>
 				<div class="mb-3">
 					<label for="address" class="form-label">Address</label>
-					<input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['address']) ? "is-invalid": "is-valid");?>" name="address" placeholder="Enter Address" value="<?php echo $address?>" required>
+					<input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['address']) ? "is-invalid": "is-valid");?>" name="address" placeholder="<?php echo $address?>" value="<?php echo $address?>" required>
 					<?php 
 						if(isset($error['address'])) {
 							echo "
@@ -313,7 +309,7 @@
 				</div>
 				<div class="mb-3">
 					<label for="city" class="form-label">City</label>
-					<input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['city']) ? "is-invalid": "is-valid");?>" name="city" placeholder="Enter City" value="<?php echo $city?>" required>
+					<input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['city']) ? "is-invalid": "is-valid");?>" name="city" placeholder="<?php echo $city?>" value="<?php echo $city?>" required>
 					<?php 
 						if(isset($error['city'])) {
 							echo "
@@ -326,7 +322,7 @@
 				</div>
 				<div class="mb-3">
 					<label for="region" class="form-label">Region</label>
-					<input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['region']) ? "is-invalid": "is-valid");?>" name="region" placeholder="Enter Region" value="<?php echo $region?>" required>
+					<input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['region']) ? "is-invalid": "is-valid");?>" name="region" placeholder="<?php echo $region?>" value="<?php echo $region?>" required>
 					<?php 
 						if(isset($error['region'])) {
 							echo "
@@ -339,7 +335,7 @@
 				</div>
 				<div class="mb-3">
 					<label for="zipCode" class="form-label">Zip Code</label>
-					<input type="number" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['zipCode']) ? "is-invalid": "is-valid");?>" name="zipCode" placeholder="Enter Zip Code" value="<?php echo $zipCode?>" required>
+					<input type="number" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['zipCode']) ? "is-invalid": "is-valid");?>" name="zipCode" placeholder="<?php echo $zipCode?>" value="<?php echo $zipCode?>" required>
 					<?php 
 						if(isset($error['zipCode'])) {
 							echo "
@@ -352,7 +348,7 @@
 				</div>
 				<div class="mb-3">
 					<label for="cellphoneNumber" class="form-label">Cellphone Number (11-Digits)</label>
-					<input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['cellphoneNumber']) ? "is-invalid": "is-valid");?>" name="cellphoneNumber" placeholder="Enter Cellphone Number" pattern="[0-9]{11}" maxlength="11" minlength="11"value="<?php echo $cellphoneNumber?>" required>
+					<input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['cellphoneNumber']) ? "is-invalid": "is-valid");?>" name="cellphoneNumber" placeholder="<?php echo $cellphoneNumber?>" pattern="[0-9]{11}" maxlength="11" minlength="11"value="<?php echo $cellphoneNumber?>" required>
 					<?php 
 						if(isset($error['cellphoneNumber'])) {
 							echo "
