@@ -44,67 +44,14 @@
         <?php
             // If the User Click the Edit Button
             if(isset($_POST['edit'])) {
-                include_once("../modals/modalForm.php");
-                $itemName = $_POST['edit'];
-                $itemId = $_POST['itemId'];
-                $itemCategory = $_POST['itemCategory'];
-                $itemPrice = $_POST['itemPrice'];
-                $itemDescription = $_POST['itemDescription'];
-
-                // Remove Price Formatting
-                $itemPrice = str_replace(",", "", $itemPrice);;
-
-                //Query and Execute for the category
-                $sqlQuery = "SELECT category_name FROM tbl_category WHERE category_name NOT LIKE 'All' ORDER BY category_name";
-                $sqlQueryResult = $connection->query($sqlQuery);
+                include("../modals/modalEdit.php");   
                 ?>
                 
-                <script>
-                    document.getElementById("myModalFormLabelh5").innerHTML = "Edit | <?php echo $itemName;?>"
-                    document.getElementById("myModalFormOutput").innerHTML = "<div class='mb-3'>" +
-                                                                                "<label for='itemPicture' class='form-label'>Item Picture</label>" +
-                                                                                "<input class='form-control' type='file' accept='image/*' name='itemPicture'>" +
-                                                                            "</div>" +
-                                                                            "<div class='mb-3'>" +
-                                                                                "<label for='itemName' class='form-label'>Item Name</label>" +
-                                                                                "<input type='text' class='form-control ' name='itemName' placeholder='<?php echo $itemName?>' value='<?php echo $itemName?>' required>" +
-                                                                                "<input type='hidden' name='itemId' value='<?php echo $itemId;?>'>" +
-                                                                            "</div>" +
-                                                                            "<div class='mb-3'>" +
-                                                                                "<label for='itemCategory' class='form-label'>Item Category</label>" +
-                                                                                "<select class='form-select mt-1' name='itemCategory' required>" +
-                                                                                    "<option value='' disabled selected hidden>Please Choose...</option>" +
-                                                                                    <?php
-                                                                                        while($categoryData = $sqlQueryResult->fetch_assoc()) {
-                                                                                            $categoryName = $categoryData["category_name"];
-                                                                                            if($itemCategory == $categoryName) {
-                                                                                                echo "\"<option value='$categoryName' selected>$categoryName</option>\"+";
-                                                                                            } else {
-                                                                                                echo "\"<option value='$categoryName'>$categoryName</option>\"+";
-                                                                                            }
-                                                                                        }
-                                                                                    ?>
-                                                                                "</select>" +
-                                                                            "</div>" +
-                                                                            "<div class='mb-3'>" +
-                                                                                "<label for='itemPrice' class='form-label'>Item Price</label>" +
-                                                                                "<div class='input-group mb-3'>" +
-                                                                                    "<span class='input-group-text'>₱</span>" +
-                                                                                    "<input type='number' class='form-control' aria-label='Peso amount (with dot and two decimal places)' name='itemPrice' placeholder='e.g 25.00' step='.01' min='1' max='999999999' value='<?php echo $itemPrice?>' required>" +
-                                                                                "</div>" +
-                                                                            "</div>" +
-                                                                            "<div class='mb-3'>" +
-                                                                                "<label for='itemDescription' class='form-label'>Item Description</label>" +
-                                                                                "<textarea class='form-control' rows='3' name='itemDescription' style='max-height: 15rem;' placeholder='<?php echo $itemDescription?>' required><?php echo $itemDescription?></textarea>" +
-                                                                            "</div>"
-
-                    document.getElementById("myModalFormButtons").insertAdjacentHTML("afterbegin", "<button type='submit' name='edit-action' class='btn btn-primary btn-success'>Update</button>")
-                    myModalForm.show()
-                </script>
-
+                <script>myModalItemEdit.show()</script>
+                
                 <?php
             } elseif(isset($_POST['delete'])) {
-                include_once("../modals/modal.php");
+                include("../modals/modal.php");
                 $itemName = $_POST['delete'];
                 $itemId = $_POST['itemId'];
                 ?>
@@ -130,7 +77,7 @@
                 
                 
             } elseif(isset($_POST['edit-action'])) {
-                include_once("../modals/modal.php");
+                include("../modals/modal.php");
 
                 $itemId = $_POST['itemId'];
 
@@ -258,7 +205,7 @@
                     <h1><?php echo $categoryName?></h1>
                 </div>
                 <div class="col-6 col-md-4 text-end pe-3">
-                    <h1><a href="categoryList.php" class="text-white text-decoration-none" onclick="window.history.go(-1); return false;"><i class="bi bi-arrow-counterclockwise"></i>Back</a></h1>
+                    <h1><a href="home.php" class="text-white text-decoration-none"><i class="bi bi-arrow-counterclockwise"></i>Back</a></h1>
                 </div>
             </div>
             <div class="row row-cols-1 row-cols-md-4 g-4 row justify-content-md-center">
