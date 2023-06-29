@@ -170,37 +170,37 @@
                             History is Empty.
                         </div>";
                 } else {
-                  $querySelectTotal = "SELECT SUM(item_price * item_quantity) AS totalPrice, SUM(item_quantity) AS totalQuantity FROM tbl_history WHERE id = $lastId";
-                  $querySelectTotalResult = $connection->query($querySelectTotal);
-                  $historyTotal = $querySelectTotalResult->fetch_assoc();
-                  $historyTotalPrice = $historyTotal["totalPrice"];
-                  $historyTotalQuantity = $historyTotal["totalQuantity"];
+                    $querySelectTotal = "SELECT SUM(item_price * item_quantity) AS totalPrice, SUM(item_quantity) AS totalQuantity FROM tbl_history WHERE id = $lastId";
+                    $querySelectTotalResult = $connection->query($querySelectTotal);
+                    $historyTotal = $querySelectTotalResult->fetch_assoc();
+                    $historyTotalPrice = $historyTotal["totalPrice"];
+                    $historyTotalQuantity = $historyTotal["totalQuantity"];
 
-                  echo "
-                      </tbody>
-                      <tfoot class='text-center'>
-                          <tr>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td class='text-end h5'>Grand Total:</td>
-                              <td class='h5'>₱ $historyTotalPrice</td>
-                          </tr>
-                      </tfoot>
-                      <tfoot class='text-center'>
-                          <tr>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td class='text-end h5'>Total Items:</td>
-                              <td class='h5'>$historyTotalQuantity</td>
-                          </tr>
-                      </tfoot>
-                      </table>
-                      <div class='card-footer text-center h5 m-0 text-white'>
-                          Time Purchase: $historyTimeFormatted
-                      </div>
-                  ";
+                    echo "
+                        </tbody>
+                        <tfoot class='text-center'>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class='text-end h5'>Grand Total:</td>
+                                <td class='h5'>₱ $historyTotalPrice</td>
+                            </tr>
+                        </tfoot>
+                        <tfoot class='text-center'>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class='text-end h5'>Total Items:</td>
+                                <td class='h5'>$historyTotalQuantity</td>
+                            </tr>
+                        </tfoot>
+                        </table>
+                        <div class='card-footer text-center h5 m-0 text-white'>
+                            Time Purchase: $historyTimeFormatted
+                        </div>
+                    ";
                 }
             ?>
         </div>

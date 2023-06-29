@@ -84,8 +84,8 @@
                                     <option value='$categoryId|$categoryName' name='category'>$categoryName</option>
                                 ";
                             }
-                          ?>
-                      </select>
+                            ?>
+                        </select>
                 </div>
                 <div class="col text-center">
                     <button type="submit" class="btn btn-primary mt-2">SELECT CATEGORY</button>

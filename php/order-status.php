@@ -182,10 +182,10 @@
                                         </div>
                                         <div class='order-2 me-2 ms-2'>
                                             <select class='form-select form-select-sm bg-dark text-white' name='orderStatus' style='width: 11rem;'>
-                                              <option ". ($historyStatus == 'pending' ? 'selected' : '') ." value='pending'>Pending</option>
-                                              <option ". ($historyStatus == 'processing' ? 'selected' : '') ." value='processing'>Processing</option>
-                                              <option ". ($historyStatus == 'delivered' ? 'selected' : '') ." value='delivered'>Delivered</option>
-                                              <option ". ($historyStatus == 'canceled' ? 'selected' : '') ." value='canceled'>Canceled</option>
+                                                <option ". ($historyStatus == 'pending' ? 'selected' : '') ." value='pending'>Pending</option>
+                                                <option ". ($historyStatus == 'processing' ? 'selected' : '') ." value='processing'>Processing</option>
+                                                <option ". ($historyStatus == 'delivered' ? 'selected' : '') ." value='delivered'>Delivered</option>
+                                                <option ". ($historyStatus == 'canceled' ? 'selected' : '') ." value='canceled'>Canceled</option>
                                             </select>
                                         </div>
                                         <div class='order-3'>
@@ -238,31 +238,31 @@
                     $historyTotalPrice = $historyTotal["totalPrice"];
                     $historyTotalQuantity = $historyTotal["totalQuantity"];
 
-                  echo "
-                      </tbody>
-                      <tfoot class='text-center'>
-                          <tr>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td class='text-end h5'>Grand Total:</td>
-                              <td class='h5'>₱ $historyTotalPrice</td>
-                          </tr>
-                      </tfoot>
-                      <tfoot class='text-center'>
-                          <tr>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td class='text-end h5'>Total Items:</td>
-                              <td class='h5'>$historyTotalQuantity</td>
-                          </tr>
-                      </tfoot>
-                      </table>
-                      <div class='card-footer text-center h5 m-0 text-white'>
-                          Time Purchase: $historyTimeFormatted
-                      </div>
-                  ";
+                    echo "
+                        </tbody>
+                        <tfoot class='text-center'>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class='text-end h5'>Grand Total:</td>
+                                <td class='h5'>₱ $historyTotalPrice</td>
+                            </tr>
+                        </tfoot>
+                        <tfoot class='text-center'>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class='text-end h5'>Total Items:</td>
+                                <td class='h5'>$historyTotalQuantity</td>
+                            </tr>
+                        </tfoot>
+                        </table>
+                        <div class='card-footer text-center h5 m-0 text-white'>
+                            Time Purchase: $historyTimeFormatted
+                        </div>
+                    ";
                 }
             ?>
         </div>

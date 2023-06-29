@@ -197,22 +197,22 @@
                         <h2>Cart is Empty.</h2>
                     </div>";
             } else {
-              echo "
-              <form action='' method='post' id=formCart>
-                  <table class='table table-dark  border-white align-middle'>
-                      <thead class='text-center'>
-                          <tr>
-                              <th class='col-1'>REMOVE</th>
-                              <th class='col-1'>PICTURE</th>
-                              <th class='col-2'>NAME</th>
-                              <th class='col-1'>PRICE</th>
-                              <th class='col-1'>QUANTITY</th>
-                              <th class='col-1'>TOTAL</th>
-                          </tr>
-                      </thead>
+                echo "
+                <form action='' method='post' id=formCart>
+                    <table class='table table-dark  border-white align-middle'>
+                        <thead class='text-center'>
+                            <tr>
+                                <th class='col-1'>REMOVE</th>
+                                <th class='col-1'>PICTURE</th>
+                                <th class='col-2'>NAME</th>
+                                <th class='col-1'>PRICE</th>
+                                <th class='col-1'>QUANTITY</th>
+                                <th class='col-1'>TOTAL</th>
+                            </tr>
+                        </thead>
 
-                      <tbody>
-              ";
+                        <tbody>
+                ";
 
                 //If the Cart is not empty, list all the current item in cart
                 $userId = $_SESSION['userId'];
@@ -342,7 +342,7 @@
                     var newValue = parseInt(inputValue) - 1;
 
                     if(newValue > 0) {
-                       input.value = newValue;
+                        input.value = newValue;
                     }
                 });
             }

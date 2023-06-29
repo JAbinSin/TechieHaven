@@ -125,19 +125,19 @@
                 // File Image Validations
                 $uploadedImage = false;
 
-				if($_FILES['categoryPicture']['error'] == 4){
+                if($_FILES['categoryPicture']['error'] == 4){
                     $uploadedImage = false;
-				} else {
-					//Check if the file type is an image format and if the user upload an image or not
-					//Add an exception so it would not check an empty upload
-					if((@exif_imagetype($_FILES['categoryPicture']['tmp_name']) == false) && (@!empty($_FILES['categoryPicture']['tmp_name']))) {
-						$error['categoryPicture'] = "File Uploaded is not an Image Format / Empty.";
-					} else if(@empty(exif_imagetype($_FILES['categoryPicture']['tmp_name']))) {
-						$uploadedImage = false;
-					} else {
-						$uploadedImage = true;
-					}
-				}
+                } else {
+                    //Check if the file type is an image format and if the user upload an image or not
+                    //Add an exception so it would not check an empty upload
+                    if((@exif_imagetype($_FILES['categoryPicture']['tmp_name']) == false) && (@!empty($_FILES['categoryPicture']['tmp_name']))) {
+                        $error['categoryPicture'] = "File Uploaded is not an Image Format / Empty.";
+                    } else if(@empty(exif_imagetype($_FILES['categoryPicture']['tmp_name']))) {
+                        $uploadedImage = false;
+                    } else {
+                        $uploadedImage = true;
+                    }
+                }
 
                 // Update if no Error found
                 if(empty($error)) {
@@ -171,7 +171,7 @@
                         $sqlUpdateResult = $connection->query($sqlUpdate);
                     } else {
                         $sqlUpdate = "UPDATE tbl_category SET category_name = '$categoryName' WHERE id = '$categoryId'";
-					    $sqlUpdateResult = $connection->query($sqlUpdate);
+                        $sqlUpdateResult = $connection->query($sqlUpdate);
                     }
 
                     if($sqlUpdateResult) {

@@ -81,19 +81,19 @@
                 // File Image Validations
                 $uploadedImage = false;
 
-				if($_FILES['itemPicture']['error'] == 4){
+                if($_FILES['itemPicture']['error'] == 4){
                     $uploadedImage = false;
-				} else {
-					//Check if the file type is an image format and if the user upload an image or not
-					//Add an exception so it would not check an empty upload
-					if((@exif_imagetype($_FILES['itemPicture']['tmp_name']) == false) && (@!empty($_FILES['itemPicture']['tmp_name']))) {
-						$error['itemPicture'] = "File Uploaded is not an Image Format / Empty.";
-					} else if(@empty(exif_imagetype($_FILES['itemPicture']['tmp_name']))) {
-						$uploadedImage = false;
-					} else {
-						$uploadedImage = true;
-					}
-				}
+                } else {
+                    //Check if the file type is an image format and if the user upload an image or not
+                    //Add an exception so it would not check an empty upload
+                    if((@exif_imagetype($_FILES['itemPicture']['tmp_name']) == false) && (@!empty($_FILES['itemPicture']['tmp_name']))) {
+                        $error['itemPicture'] = "File Uploaded is not an Image Format / Empty.";
+                    } else if(@empty(exif_imagetype($_FILES['itemPicture']['tmp_name']))) {
+                        $uploadedImage = false;
+                    } else {
+                        $uploadedImage = true;
+                    }
+                }
 
                 
                 // Update if no Error found
@@ -122,7 +122,7 @@
                         $sqlInsertResult = $connection->query($sqlInsert);
                     } else {
                         $sqlInsert = "INSERT INTO tbl_items(item_name, item_description, item_price, item_category) VALUES ('$itemName', '$itemDescription', '$itemPrice', '$itemCategory')";
-					    $sqlInsertResult = $connection->query($sqlInsert);
+                        $sqlInsertResult = $connection->query($sqlInsert);
                     }
 
                     if($sqlInsertResult) {
@@ -157,27 +157,27 @@
                     <label for="itemPicture" class="form-label">Item Picture</label>
                     <input class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['itemPicture']) ? "is-invalid": "is-valid");?>" type="file" accept="image/*" name="itemPicture">
                     <?php 
-						if(isset($error['itemPicture'])) {
-							echo "
-								<div class='invalid-feedback'>
-								" . $error['itemPicture'] . "
-								</div>
-							";
-						}
-					?>
+                        if(isset($error['itemPicture'])) {
+                            echo "
+                                <div class='invalid-feedback'>
+                                " . $error['itemPicture'] . "
+                                </div>
+                            ";
+                        }
+                    ?>
                 </div>
                 <div class="mb-3">
                     <label for="itemName" class="form-label">Item Name</label>
                     <input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['itemName']) ? "is-invalid": "is-valid");?>" name="itemName" placeholder="e.g i5-7400" value="<?php echo $itemName?>" required>
                     <?php 
-						if(isset($error['itemName'])) {
-							echo "
-								<div class='invalid-feedback'>
-								" . $error['itemName'] . "
-								</div>
-							";
-						}
-					?>
+                        if(isset($error['itemName'])) {
+                            echo "
+                                <div class='invalid-feedback'>
+                                " . $error['itemName'] . "
+                                </div>
+                            ";
+                        }
+                    ?>
                 </div>
                 <div class="mb-3">
                     <label for="itemCategory" class="form-label">Item Category</label>

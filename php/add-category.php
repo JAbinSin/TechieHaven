@@ -69,19 +69,19 @@
                 // File Image Validations
                 $uploadedImage = false;
 
-				if($_FILES['categoryPicture']['error'] == 4){
+                if($_FILES['categoryPicture']['error'] == 4){
                     $uploadedImage = false;
-				} else {
-					//Check if the file type is an image format and if the user upload an image or not
-					//Add an exception so it would not check an empty upload
-					if((@exif_imagetype($_FILES['categoryPicture']['tmp_name']) == false) && (@!empty($_FILES['categoryPicture']['tmp_name']))) {
-						$error['categoryPicture'] = "File Uploaded is not an Image Format / Empty.";
-					} else if(@empty(exif_imagetype($_FILES['categoryPicture']['tmp_name']))) {
-						$uploadedImage = false;
-					} else {
-						$uploadedImage = true;
-					}
-				}
+                } else {
+                    //Check if the file type is an image format and if the user upload an image or not
+                    //Add an exception so it would not check an empty upload
+                    if((@exif_imagetype($_FILES['categoryPicture']['tmp_name']) == false) && (@!empty($_FILES['categoryPicture']['tmp_name']))) {
+                        $error['categoryPicture'] = "File Uploaded is not an Image Format / Empty.";
+                    } else if(@empty(exif_imagetype($_FILES['categoryPicture']['tmp_name']))) {
+                        $uploadedImage = false;
+                    } else {
+                        $uploadedImage = true;
+                    }
+                }
 
                 
                 // Update if no Error found
@@ -110,7 +110,7 @@
                         $sqlInsertResult = $connection->query($sqlInsert);
                     } else {
                         $sqlInsert = "INSERT INTO tbl_category(category_name) VALUES ('$categoryName')";
-					    $sqlInsertResult = $connection->query($sqlInsert);
+                        $sqlInsertResult = $connection->query($sqlInsert);
                     }
 
                     if($sqlInsertResult) {
@@ -143,28 +143,28 @@
                     <label for="categoryPicture" class="form-label">Category Picture</label>
                     <input class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['categoryPicture']) ? "is-invalid": "is-valid");?>" type="file" accept="image/*" name="categoryPicture">
                     <?php 
-						if(isset($error['categoryPicture'])) {
-							echo "
-								<div class='invalid-feedback'>
-								" . $error['categoryPicture'] . "
-								</div>
-							";
-						}
-					?>
+                        if(isset($error['categoryPicture'])) {
+                            echo "
+                                <div class='invalid-feedback'>
+                                " . $error['categoryPicture'] . "
+                                </div>
+                            ";
+                        }
+                    ?>
                 </div>
                 <div class="mb-3">
                     <label for="categoryName" class="form-label">Category Name</label>
                     <input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['categoryName']) ? "is-invalid": "is-valid");?>" name="categoryName" placeholder="e.g CPU" pattern="[A-z0-9À-ž\s]+" value="<?php echo $categoryName?>" required>
                     <div class="form-text text-light">(Only Characters and Number Are Allowed)</div>
                     <?php 
-						if(isset($error['categoryName'])) {
-							echo "
-								<div class='invalid-feedback'>
-								" . $error['categoryName'] . "
-								</div>
-							";
-						}
-					?>
+                        if(isset($error['categoryName'])) {
+                            echo "
+                                <div class='invalid-feedback'>
+                                " . $error['categoryName'] . "
+                                </div>
+                            ";
+                        }
+                    ?>
                 </div>
                 <div class="col text-center">
                     <button type="submit" name="add" class="btn btn-primary btn-success">ADD CATEGORY</button>

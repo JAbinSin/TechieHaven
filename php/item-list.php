@@ -118,19 +118,19 @@
                 // File Image Validations
                 $uploadedImage = false;
 
-				if($_FILES['itemPicture']['error'] == 4){
+                if($_FILES['itemPicture']['error'] == 4){
                     $uploadedImage = false;
-				} else {
-					//Check if the file type is an image format and if the user upload an image or not
-					//Add an exception so it would not check an empty upload
-					if((@exif_imagetype($_FILES['itemPicture']['tmp_name']) == false) && (@!empty($_FILES['itemPicture']['tmp_name']))) {
-						$error['itemPicture'] = "File Uploaded is not an Image Format / Empty.";
-					} else if(@empty(exif_imagetype($_FILES['itemPicture']['tmp_name']))) {
-						$uploadedImage = false;
-					} else {
-						$uploadedImage = true;
-					}
-				}
+                } else {
+                    //Check if the file type is an image format and if the user upload an image or not
+                    //Add an exception so it would not check an empty upload
+                    if((@exif_imagetype($_FILES['itemPicture']['tmp_name']) == false) && (@!empty($_FILES['itemPicture']['tmp_name']))) {
+                        $error['itemPicture'] = "File Uploaded is not an Image Format / Empty.";
+                    } else if(@empty(exif_imagetype($_FILES['itemPicture']['tmp_name']))) {
+                        $uploadedImage = false;
+                    } else {
+                        $uploadedImage = true;
+                    }
+                }
 
                 // Update if no Error found
                 if(empty($error)) {
@@ -164,7 +164,7 @@
                         $sqlUpdateResult = $connection->query($sqlUpdate);
                     } else {
                         $sqlUpdate = "UPDATE tbl_items SET item_name = '$itemName', item_description = '$itemDescription', item_price = '$itemPrice', item_category = '$itemCategory' WHERE id = '$itemId'";
-					    $sqlUpdateResult = $connection->query($sqlUpdate);
+                        $sqlUpdateResult = $connection->query($sqlUpdate);
                     }
 
                     if($sqlUpdateResult) {
@@ -273,9 +273,9 @@
 
                     if($itemEmpty) {
                         echo "
-                          <div class='alert alert-warning text-center w-100' role='alert'>
-                              <h2>No Available Item Yet.</h2>
-                          </div>";
+                            <div class='alert alert-warning text-center w-100' role='alert'>
+                                <h2>No Available Item Yet.</h2>
+                            </div>";
                     }
                 ?>
             </div>

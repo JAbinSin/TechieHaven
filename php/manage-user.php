@@ -7,8 +7,6 @@
     if($_SESSION['userType'] != "admin") {
         header("Location: ../index.php");
     }
-
-
 ?>
 
 <!doctype html>
@@ -73,18 +71,18 @@
 
                 // Check for error during database execution
                 if($deleteCategory) {
-					?>
-					<script>document.getElementById("myModalOutput").innerHTML = "<?php echo $userEmail; ?> Successfuly Deleted"</script>
-					<script>myModal.show()</script>
+                    ?>
+                    <script>document.getElementById("myModalOutput").innerHTML = "<?php echo $userEmail; ?> Successfuly Deleted"</script>
+                    <script>myModal.show()</script>
 
-					<?php 
-				}
-				else {
-					?>
-					<script>document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"</script>
-					<script>myModal.show()</script>
-					<?php 
-				}
+                    <?php 
+                }
+                else {
+                    ?>
+                    <script>document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"</script>
+                    <script>myModal.show()</script>
+                    <?php 
+                }
             }
         ?>
 

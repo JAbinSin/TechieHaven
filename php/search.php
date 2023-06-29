@@ -108,10 +108,10 @@
 
                     if($itemEmpty) {
                         echo "
-                          <div class='alert alert-warning text-center w-100' role='alert'>
-                              <h2>Search No Result.</h2>
-                              <h4 class='fw-normal'>We're sorry. We cannot find any matches for your search term.</h4>
-                          </div>";
+                            <div class='alert alert-warning text-center w-100' role='alert'>
+                                <h2>Search No Result.</h2>
+                                <h4 class='fw-normal'>We're sorry. We cannot find any matches for your search term.</h4>
+                            </div>";
                     }
                 ?>
             </div>

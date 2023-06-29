@@ -117,19 +117,19 @@
                 // File Image Validations
                 $uploadedImage = false;
 
-				if($_FILES['profilePicture']['error'] == 4){
+                if($_FILES['profilePicture']['error'] == 4){
                     $uploadedImage = false;
-				} else {
-					//Check if the file type is an image format and if the user upload an image or not
-					//Add an exception so it would not check an empty upload
-					if((@exif_imagetype($_FILES['profilePicture']['tmp_name']) == false) && (@!empty($_FILES['profilePicture']['tmp_name']))) {
+                } else {
+                    //Check if the file type is an image format and if the user upload an image or not
+                    //Add an exception so it would not check an empty upload
+                    if((@exif_imagetype($_FILES['profilePicture']['tmp_name']) == false) && (@!empty($_FILES['profilePicture']['tmp_name']))) {
                         $error['profilePicture'] = "File Uploaded is not an Image Format / Empty.";
-					} elseif(@empty(exif_imagetype($_FILES['profilePicture']['tmp_name']))) {
-						$uploadedImage = false;
-					} else {
-						$uploadedImage = true;
-					}
-				}
+                    } elseif(@empty(exif_imagetype($_FILES['profilePicture']['tmp_name']))) {
+                        $uploadedImage = false;
+                    } else {
+                        $uploadedImage = true;
+                    }
+                }
 
                 
                 // Update if no Error found
@@ -161,10 +161,10 @@
                     
                     if($uploadedImage == true){
                         $sqlUpdate = "UPDATE tbl_users SET first_name = '$fName', middle_name = '$mName', last_name = '$lName', address = '$address', city = '$city', region = '$region', zip_code = '$zipCode', password = '$hashedPassword', email = '$email', phone_number = '$cellphoneNumber', profile_picture = '$fileName' WHERE id = '$id'";
-					    $sqlUpdateResult = $connection->query($sqlUpdate);
+                        $sqlUpdateResult = $connection->query($sqlUpdate);
                     } else {
                         $sqlUpdate = "UPDATE tbl_users SET first_name = '$fName', middle_name = '$mName', last_name = '$lName', address = '$address', city = '$city', region = '$region', zip_code = '$zipCode', password = '$hashedPassword', email = '$email', phone_number = '$cellphoneNumber' WHERE id = '$id'";
-					    $sqlUpdateResult = $connection->query($sqlUpdate);
+                        $sqlUpdateResult = $connection->query($sqlUpdate);
                     }
 
                     if($sqlUpdateResult) {
@@ -207,158 +207,158 @@
                     <label for="profilePicture" class="form-label">Profile Picture</label>
                     <input class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['profilePicture']) ? "is-invalid": "is-valid");?>" type="file" accept="image/*" name="profilePicture">
                     <?php 
-						if(isset($error['profilePicture'])) {
-							echo "
-								<div class='invalid-feedback'>
-								" . $error['profilePicture'] . "
-								</div>
-							";
-						}
-					?>
+                        if(isset($error['profilePicture'])) {
+                            echo "
+                                <div class='invalid-feedback'>
+                                " . $error['profilePicture'] . "
+                                </div>
+                            ";
+                        }
+                    ?>
                 </div>
                 <div class="mb-3">
-					<label for="fName" class="form-label">First Name</label>
-					<input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['fName']) ? "is-invalid": "is-valid");?>" name="fName" placeholder="<?php echo $fName?>" pattern="[A-zÀ-ž\s]+" value="<?php echo $fName?>" required>
-					<?php 
-						if(isset($error['fName'])) {
-							echo "
-								<div class='invalid-feedback'>
-								" . $error['fName'] . "
-								</div>
-							";
-						}
-					?>
-				</div>
-				<div class="mb-3">
-					<label for="mName" class="form-label">Middle Name</label>
-					<input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['mName']) ? "is-invalid": "is-valid");?>" name="mName" placeholder="<?php echo $mName?>" pattern="[A-zÀ-ž\s]+" value="<?php echo $mName?>" required>
-					<?php 
-						if(isset($error['mName'])) {
-							echo "
-								<div class='invalid-feedback'>
-								" . $error['mName'] . "
-								</div>
-							";
-						}
-					?>
-				</div>
-				<div class="mb-3">
-					<label for="mName" class="form-label">Last Name</label>
-					<input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['lName']) ? "is-invalid": "is-valid");?>" name="lName" placeholder="<?php echo $lName?>" pattern="[A-zÀ-ž\s]+" value="<?php echo $lName?>" required>
-					<?php 
-						if(isset($error['lName'])) {
-							echo "
-								<div class='invalid-feedback'>
-								" . $error['lName'] . "
-								</div>
-							";
-						}
-					?>
-				</div>
-				<div class="mb-3">
-					<label for="email" class="form-label">Email</label>
-					<input type="email" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['email']) ? "is-invalid": "is-valid");?>" name="email" placeholder="<?php echo $email?>" value="<?php echo $email?>" required>
-					<?php 
-						if(isset($error['email'])) {
-							echo "
-								<div class='invalid-feedback'>
-								" . $error['email'] . "
-								</div>
-							";
-						}
-					?>
-				</div>
-				<div class="mb-3">
-					<label for="password" class="form-label">Password</label>
-					<input type="password" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['password']) ? "is-invalid": "");?>" name="password" placeholder="Enter Password" required>
-					<?php 
-						if(isset($error['password'])) {
-							echo "
-								<div class='invalid-feedback'>
-								" . $error['password'] . "
-								</div>
-							";
-						}
-					?>
-				</div>
-				<div class="mb-3">
-					<label for="confirmPassword" class="form-label">Confirm Password</label>
-					<input type="password" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['confirmPassword']) ? "is-invalid": "");?>" name="confirmPassword" placeholder="Confirm Password" required>
-					<?php 
-						if(isset($error['confirmPassword'])) {
-							echo "
-								<div class='invalid-feedback'>
-								" . $error['confirmPassword'] . "
-								</div>
-							";
-						}
-					?>
-				</div>
-				<div class="mb-3">
-					<label for="address" class="form-label">Address</label>
-					<input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['address']) ? "is-invalid": "is-valid");?>" name="address" placeholder="<?php echo $address?>" value="<?php echo $address?>" required>
-					<?php 
-						if(isset($error['address'])) {
-							echo "
-								<div class='invalid-feedback'>
-								" . $error['address'] . "
-								</div>
-							";
-						}
-					?>
-				</div>
-				<div class="mb-3">
-					<label for="city" class="form-label">City</label>
-					<input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['city']) ? "is-invalid": "is-valid");?>" name="city" placeholder="<?php echo $city?>" value="<?php echo $city?>" required>
-					<?php 
-						if(isset($error['city'])) {
-							echo "
-								<div class='invalid-feedback'>
-								" . $error['city'] . "
-								</div>
-							";
-						}
-					?>
-				</div>
-				<div class="mb-3">
-					<label for="region" class="form-label">Region</label>
-					<input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['region']) ? "is-invalid": "is-valid");?>" name="region" placeholder="<?php echo $region?>" value="<?php echo $region?>" required>
-					<?php 
-						if(isset($error['region'])) {
-							echo "
-								<div class='invalid-feedback'>
-								" . $error['region'] . "
-								</div>
-							";
-						}
-					?>
-				</div>
-				<div class="mb-3">
-					<label for="zipCode" class="form-label">Zip Code</label>
-					<input type="number" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['zipCode']) ? "is-invalid": "is-valid");?>" name="zipCode" placeholder="<?php echo $zipCode?>" value="<?php echo $zipCode?>" required>
-					<?php 
-						if(isset($error['zipCode'])) {
-							echo "
-								<div class='invalid-feedback'>
-								" . $error['zipCode'] . "
-								</div>
-							";
-						}
-					?>
-				</div>
-				<div class="mb-3">
-					<label for="cellphoneNumber" class="form-label">Cellphone Number (11-Digits)</label>
-					<input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['cellphoneNumber']) ? "is-invalid": "is-valid");?>" name="cellphoneNumber" placeholder="<?php echo $cellphoneNumber?>" pattern="[0-9]{11}" maxlength="11" minlength="11"value="<?php echo $cellphoneNumber?>" required>
-					<?php 
-						if(isset($error['cellphoneNumber'])) {
-							echo "
-								<div class='invalid-feedback'>
-								" . $error['cellphoneNumber'] . "
-								</div>
-							";
-						}
-					?>
-				</div>
+                    <label for="fName" class="form-label">First Name</label>
+                    <input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['fName']) ? "is-invalid": "is-valid");?>" name="fName" placeholder="<?php echo $fName?>" pattern="[A-zÀ-ž\s]+" value="<?php echo $fName?>" required>
+                    <?php 
+                        if(isset($error['fName'])) {
+                            echo "
+                                <div class='invalid-feedback'>
+                                " . $error['fName'] . "
+                                </div>
+                            ";
+                        }
+                    ?>
+                </div>
+                <div class="mb-3">
+                    <label for="mName" class="form-label">Middle Name</label>
+                    <input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['mName']) ? "is-invalid": "is-valid");?>" name="mName" placeholder="<?php echo $mName?>" pattern="[A-zÀ-ž\s]+" value="<?php echo $mName?>" required>
+                    <?php 
+                        if(isset($error['mName'])) {
+                            echo "
+                                <div class='invalid-feedback'>
+                                " . $error['mName'] . "
+                                </div>
+                            ";
+                        }
+                    ?>
+                </div>
+                <div class="mb-3">
+                    <label for="mName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['lName']) ? "is-invalid": "is-valid");?>" name="lName" placeholder="<?php echo $lName?>" pattern="[A-zÀ-ž\s]+" value="<?php echo $lName?>" required>
+                    <?php 
+                        if(isset($error['lName'])) {
+                            echo "
+                                <div class='invalid-feedback'>
+                                " . $error['lName'] . "
+                                </div>
+                            ";
+                        }
+                    ?>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['email']) ? "is-invalid": "is-valid");?>" name="email" placeholder="<?php echo $email?>" value="<?php echo $email?>" required>
+                    <?php 
+                        if(isset($error['email'])) {
+                            echo "
+                                <div class='invalid-feedback'>
+                                " . $error['email'] . "
+                                </div>
+                            ";
+                        }
+                    ?>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['password']) ? "is-invalid": "");?>" name="password" placeholder="Enter Password" required>
+                    <?php 
+                        if(isset($error['password'])) {
+                            echo "
+                                <div class='invalid-feedback'>
+                                " . $error['password'] . "
+                                </div>
+                            ";
+                        }
+                    ?>
+                </div>
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['confirmPassword']) ? "is-invalid": "");?>" name="confirmPassword" placeholder="Confirm Password" required>
+                    <?php 
+                        if(isset($error['confirmPassword'])) {
+                            echo "
+                                <div class='invalid-feedback'>
+                                " . $error['confirmPassword'] . "
+                                </div>
+                            ";
+                        }
+                    ?>
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Address</label>
+                    <input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['address']) ? "is-invalid": "is-valid");?>" name="address" placeholder="<?php echo $address?>" value="<?php echo $address?>" required>
+                    <?php 
+                        if(isset($error['address'])) {
+                            echo "
+                                <div class='invalid-feedback'>
+                                " . $error['address'] . "
+                                </div>
+                            ";
+                        }
+                    ?>
+                </div>
+                <div class="mb-3">
+                    <label for="city" class="form-label">City</label>
+                    <input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['city']) ? "is-invalid": "is-valid");?>" name="city" placeholder="<?php echo $city?>" value="<?php echo $city?>" required>
+                    <?php 
+                        if(isset($error['city'])) {
+                            echo "
+                                <div class='invalid-feedback'>
+                                " . $error['city'] . "
+                                </div>
+                            ";
+                        }
+                    ?>
+                </div>
+                <div class="mb-3">
+                    <label for="region" class="form-label">Region</label>
+                    <input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['region']) ? "is-invalid": "is-valid");?>" name="region" placeholder="<?php echo $region?>" value="<?php echo $region?>" required>
+                    <?php 
+                        if(isset($error['region'])) {
+                            echo "
+                                <div class='invalid-feedback'>
+                                " . $error['region'] . "
+                                </div>
+                            ";
+                        }
+                    ?>
+                </div>
+                <div class="mb-3">
+                    <label for="zipCode" class="form-label">Zip Code</label>
+                    <input type="number" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['zipCode']) ? "is-invalid": "is-valid");?>" name="zipCode" placeholder="<?php echo $zipCode?>" value="<?php echo $zipCode?>" required>
+                    <?php 
+                        if(isset($error['zipCode'])) {
+                            echo "
+                                <div class='invalid-feedback'>
+                                " . $error['zipCode'] . "
+                                </div>
+                            ";
+                        }
+                    ?>
+                </div>
+                <div class="mb-3">
+                    <label for="cellphoneNumber" class="form-label">Cellphone Number (11-Digits)</label>
+                    <input type="text" class="form-control text-light bg-dark <?php echo $_SESSION['firstRun'] ? "" : (isset($error['cellphoneNumber']) ? "is-invalid": "is-valid");?>" name="cellphoneNumber" placeholder="<?php echo $cellphoneNumber?>" pattern="[0-9]{11}" maxlength="11" minlength="11"value="<?php echo $cellphoneNumber?>" required>
+                    <?php 
+                        if(isset($error['cellphoneNumber'])) {
+                            echo "
+                                <div class='invalid-feedback'>
+                                " . $error['cellphoneNumber'] . "
+                                </div>
+                            ";
+                        }
+                    ?>
+                </div>
                 <div class="col text-center">
                     <button type="submit" name="update" class="btn btn-primary btn-success">UPDATE</button>
                     <br>

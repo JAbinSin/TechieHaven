@@ -46,12 +46,12 @@
                         <div class='card mb-3 ms-2 border border-secondary border-3 card-color category-card p-0'>
                             <div class='row g-0'>
                                 <div class='col-md-5 d-flex align-items-center'>
-                                  <a href='item-list.php?category=$categoryName'><img class='img-fluid category-card-img border-end border-3 border-secondary' src='../img/category/$categoryPicture' alt='Image Unavailable'></a>
+                                    <a href='item-list.php?category=$categoryName'><img class='img-fluid category-card-img border-end border-3 border-secondary' src='../img/category/$categoryPicture' alt='Image Unavailable'></a>
                                 </div>
                                 <div class='col-md-7 d-flex align-items-center'>
-                                  <div class='card-body text-wrap text-break'>
+                                    <div class='card-body text-wrap text-break'>
                                     <h1 class='card-title line-clamp-category p-1'><a href='item-list.php?category=$categoryName' class='text-white text-decoration-none'>$categoryName</a></h1>
-                                  </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

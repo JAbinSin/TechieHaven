@@ -1,6 +1,6 @@
 <?php
-    //Include the database to the webpage to access it
-    include_once("../inc/database.php");
+	//Include the database to the webpage to access it
+	include_once("../inc/database.php");
 
 	//Check if the current user is allowed to access the webpage
 	//Only the guest can access this webpage

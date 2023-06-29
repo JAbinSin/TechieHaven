@@ -113,8 +113,8 @@
                         <div class='col text-center'>
                             <a class='btn btn-primary' href='../index.php' role='button'>HOME</a>
                         </div>
-                      </div>
-                      </body>
+                        </div>
+                        </body>
                     ";
                     exit();
                 }
@@ -221,7 +221,7 @@
                     var newValue = parseInt(inputValue) - 1;
 
                     if(newValue > 0) {
-                       input.value = newValue;
+                        input.value = newValue;
                     }
                 });
             }
