@@ -63,7 +63,13 @@
                 $queryProfileResult = $connection->query($queryProfile);
                 $profileResult = $queryProfileResult->fetch_assoc();
                 $path = "../img/profile/" . $profileResult['profile_picture'];
-                unlink($path);
+                
+                
+                //Delete the profile picture if they change from an image that is not a default
+                //Also stop the user from being able to delete the default profile
+                if($profileResult['profile_picture'] != "default.png") {
+                    unlink($path);
+                }
 
                 //Ready the query and execute it to delete the category
                 $deleteQuery = "DELETE FROM tbl_users WHERE email = '$userEmail'";
