@@ -131,6 +131,7 @@
                             $querySelectTotalResult = $connection->query($querySelectTotal);
                             $historyTotal = $querySelectTotalResult->fetch_assoc();
                             $historyTotalPrice = $historyTotal["totalPrice"];
+                            $historyTotalPriceFormat = number_format($historyTotalPrice, 2, '.', ',');
                             $historyTotalQuantity = $historyTotal["totalQuantity"];
                         }
 
@@ -143,7 +144,7 @@
                                         <td></td>
                                         <td></td>
                                         <td class='text-end h5'>Grand Total:</td>
-                                        <td class='h5'>₱ $historyTotalPrice</td>
+                                        <td class='h5'>₱ $historyTotalPriceFormat</td>
                                     </tr>
                                 </tfoot>
                                 <tfoot class='text-center'>
@@ -215,9 +216,9 @@
                         <tr class='text-center'>
                             <td class='border-start border-end'><a href='item.php?id=$historyItem'><img src='../img/items/$historyPicture' class='rounded mx-auto d-block img-fluid cart-img' alt='$historyName'></a></td>
                             <td class='h5 border-start border-end'><a href='item.php?id=$historyItem' class='text-reset text-decoration-none'>$historyName</a></td>
-                            <td class='h5 border-start border-end'>₱ $historyPrice</td>
+                            <td class='h5 border-start border-end'>₱ $historyPriceFormat</td>
                             <td class='h5 border-start border-end'>$historyQuantity</td>
-                            <td class='h5 border-start border-end'>₱ $historyPQ</td>
+                            <td class='h5 border-start border-end'>₱ $historyPQFormat</td>
                         </tr>
                     ";
                     //Check if the fetch is the first data
@@ -236,6 +237,7 @@
                     $querySelectTotalResult = $connection->query($querySelectTotal);
                     $historyTotal = $querySelectTotalResult->fetch_assoc();
                     $historyTotalPrice = $historyTotal["totalPrice"];
+                    $historyTotalPriceFormat = number_format($historyTotalPrice, 2, '.', ',');
                     $historyTotalQuantity = $historyTotal["totalQuantity"];
 
                     echo "
@@ -246,7 +248,7 @@
                                 <td></td>
                                 <td></td>
                                 <td class='text-end h5'>Grand Total:</td>
-                                <td class='h5'>₱ $historyTotalPrice</td>
+                                <td class='h5'>₱ $historyTotalPriceFormat</td>
                             </tr>
                         </tfoot>
                         <tfoot class='text-center'>
