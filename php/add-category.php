@@ -115,6 +115,8 @@
 
                     if($sqlInsertResult) {
 
+                        $_SESSION['firstRun'] = true;
+
                         ?>
                         <script>document.getElementById("myModalOutput").innerHTML = "<?php echo $categoryName; ?> Successfuly Added"</script>
                         <script>myModal.show()</script>

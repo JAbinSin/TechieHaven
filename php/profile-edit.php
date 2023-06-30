@@ -169,6 +169,8 @@
 
                     if($sqlUpdateResult) {
 
+                        $_SESSION['firstRun'] = true;
+
                         ?>
                         <script>document.getElementById("myModalOutput").innerHTML = "<?php echo $_SESSION['modalEmail']; ?> Successfuly Updated"</script>
                         <script>document.getElementById("myModalButtons").insertAdjacentHTML("afterbegin", "<a class='btn btn-primary' href='profile.php' role='button'>Profile</a>")</script>

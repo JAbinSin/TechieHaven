@@ -51,8 +51,6 @@
 		if(isset($_POST['register'])) {
 			$_SESSION['firstRun'] = false;
 
-			$userType = $_POST['userType'];
-
 			// Validate the Inputs
 			// Trim the Inputs
 			$fName = trim($_POST['fName']);
@@ -117,7 +115,7 @@
 
 				// INSERT new user
 				$sqlInsert = "INSERT INTO tbl_users(first_name, middle_name, last_name, address, city, region, zip_code, password, email, phone_number, user_type)
-				VALUES('$fName', '$mName', '$lName', '$address', '$city', '$region', '$zipCode', '$hashedPassword', '$email', '$cellphoneNumber', '$userType')";
+				VALUES('$fName', '$mName', '$lName', '$address', '$city', '$region', '$zipCode', '$hashedPassword', '$email', '$cellphoneNumber', 'customer')";
 
 				$sqlInsertResult = $connection->query($sqlInsert);
 
@@ -133,6 +131,8 @@
 					$region = "";
 					$zipCode = "";
 					$cellphoneNumber = "";
+
+					$_SESSION['firstRun'] = true;
 
 					?>
 					<script>document.getElementById("myModalButtons").insertAdjacentHTML("afterbegin", "<a class='btn btn-primary' href='login.php' role='button'>Login</a>")</script>
@@ -312,7 +312,6 @@
 						}
 					?>
 				</div>
-				<input type="hidden" name="userType" value="customer">
 				<div class="col text-center">
 					<button type="submit" name="register" class="btn btn-secondary mb-3 rounded-pill shadow-lg">Register</button>
 					<p class="m-0">Already have an account? <a href="login.php" <?php $_SESSION['firstRun'] = true; ?>>Login now</a></p>
