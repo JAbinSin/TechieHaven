@@ -11,7 +11,7 @@ An online PC Store that showcase the CRUD operations with PHP and MySQL
 - password: carlojan
 
 
-Demo Website: http://techiehaven.free.nf
+Demo Website: http://techiehaven.infinityfreeapp.com
 
 ---
 
