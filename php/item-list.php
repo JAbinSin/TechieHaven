@@ -202,7 +202,7 @@
         <div class="container p-3 mb-2 bg-normal-92 text-white rounded-3">
             <div class="row g-0">
                 <div class="col-sm-6 col-md-8 ps-3">
-                    <h1><?php echo $categoryName?></h1>
+                    <h1>Category: <?php echo $categoryName?></h1>
                 </div>
                 <div class="col-6 col-md-4 text-end pe-3">
                     <h1><a href="home.php" class="text-white text-decoration-none"><i class="bi bi-arrow-counterclockwise"></i>Back</a></h1>

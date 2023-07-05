@@ -23,6 +23,8 @@
     //Start the session of the webpage
     session_start();
 
+    date_default_timezone_set('Asia/Manila');
+
     //Set the name for the Website
     $_SESSION['siteName'] = "TechieHaven ";
 ?>

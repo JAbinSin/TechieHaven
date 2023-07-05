@@ -23,6 +23,7 @@ body {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    color: white;
 }
 
 .line-clamp-category {
@@ -33,7 +34,7 @@ body {
 }
 
 .itemList-card-admin {
-    height: 25rem;
+    height: 26rem;
     width: 17rem;
 }
 
@@ -79,6 +80,10 @@ body {
 
 .category-card-img {
     height: 10rem;
+}
+
+.hypens {
+    hyphens: auto;
 }
 
 .cart-img {

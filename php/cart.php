@@ -155,10 +155,11 @@
                     $itemId = $cartData['item_id'];
                     $itemQuantity = $cartData['quantity'];
                     $itemPrice = $cartData['item_price'];
+                    $itemTime = date("Y-m-d H:i:s");
                     
 
-                    $sqlInsert = "INSERT INTO tbl_history(user_id, item_picture, item_name, item_id, item_quantity, item_price, status)
-                    VALUES('$userId', '$itemPicture', '$itemName', '$itemId', '$itemQuantity', '$itemPrice', '$itemStatus')";
+                    $sqlInsert = "INSERT INTO tbl_history(user_id, item_picture, item_name, item_id, item_quantity, item_price, time, status)
+                    VALUES('$userId', '$itemPicture', '$itemName', '$itemId', '$itemQuantity', '$itemPrice', '$itemTime','$itemStatus')";
 
                     $sqlInsertResult = $connection->query($sqlInsert);
 

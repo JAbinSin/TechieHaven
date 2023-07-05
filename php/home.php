@@ -50,7 +50,7 @@
                                 </div>
                                 <div class='col-md-7 d-flex align-items-center'>
                                     <div class='card-body text-wrap text-break'>
-                                    <h1 class='card-title line-clamp-category p-1'><a href='item-list.php?category=$categoryName' class='text-white text-decoration-none'>$categoryName</a></h1>
+                                        <h3 class='card-title line-clamp-category p-1'><a href='item-list.php?category=$categoryName' class='text-white text-decoration-none'>$categoryName</a></h3>
                                     </div>
                                 </div>
                             </div>
