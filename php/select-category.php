@@ -9,12 +9,12 @@
     }
 
     //Check if the current session allowed the user to acces this site and redirect if not
-    if(empty($_GET["op"])) {
+    if(empty($_GET['op'])) {
         header("Location: ../index.php");
     }
 
     //Get the id from the url
-    $operation = $_GET["op"];
+    $operation = $_GET['op'];
 
     // Check if the operation is valid
     //Check if the current session allowed the user to acces this site and redirect if not
@@ -77,8 +77,8 @@
                             $sqlQueryResult = $connection->query($sqlQuery);
 
                             while($categoryData = $sqlQueryResult->fetch_assoc()) {
-                                $categoryId = $categoryData["id"];
-                                $categoryName = $categoryData["category_name"];
+                                $categoryId = $categoryData['id'];
+                                $categoryName = $categoryData['category_name'];
 
                                 echo "
                                     <option value='$categoryId|$categoryName' name='category'>$categoryName</option>

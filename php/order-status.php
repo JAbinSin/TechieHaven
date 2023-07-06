@@ -17,7 +17,7 @@
 
     $emailResult = $querySelectEmailResult->fetch_assoc();
 
-    $userEmail = $emailResult["email"];
+    $userEmail = $emailResult['email'];
 
     //Redirect the user if the id is invalid
     if(is_null($userEmail)) {
@@ -28,7 +28,7 @@
     $querySelectLast = "SELECT MIN(id) AS last FROM tbl_history WHERE user_id = $userId";
     $querySelectLastResult = $connection->query($querySelectLast);
     $Last = $querySelectLastResult->fetch_assoc();
-    $lastId = $Last["last"];
+    $lastId = $Last['last'];
 ?>
 
 <!doctype html>
@@ -61,8 +61,8 @@
         <?php 
             // If the User Click the Register Button
             if(isset($_POST['btnUpdate'])) {
-                $orderStatus = $_POST["orderStatus"];
-                $orderId = $_POST["orderId"];
+                $orderStatus = $_POST['orderStatus'];
+                $orderId = $_POST['orderId'];
 
                 $status = array("pending", "processing", "delivered", "canceled");
 
@@ -73,8 +73,12 @@
                     if(!$sqlUpdateResult) {
                         include_once("../modals/modal.php");
                         ?>
-                        <script>document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"</script>
-                        <script>myModal.show()</script>
+
+                        <script>
+                            document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"
+                            myModal.show()
+                        </script>
+
                         <?php 
                     }
                 }
@@ -104,15 +108,15 @@
                 //Uses loop to echo all the items the user selected
                 while($historyData = $querySelectHistoryResult->fetch_assoc()) {
                     //Variables
-                    $historyItem = $historyData["item_id"];
-                    $historyPicture = $historyData["item_picture"];
-                    $historyQuantity = $historyData["item_quantity"];
-                    $historyName = $historyData["item_name"];
-                    $historyPrice = $historyData["item_price"];
+                    $historyItem = $historyData['item_id'];
+                    $historyPicture = $historyData['item_picture'];
+                    $historyQuantity = $historyData['item_quantity'];
+                    $historyName = $historyData['item_name'];
+                    $historyPrice = $historyData['item_price'];
                     $historyPriceFormat = number_format($historyPrice, 2, '.', ',');
-                    $historyTime = strtotime($historyData["time"]);
+                    $historyTime = strtotime($historyData['time']);
                     $historyTimeFormatted = date("F j\, Y \of A g\:i", $historyTime);
-                    $historyStatus = $historyData["status"];
+                    $historyStatus = $historyData['status'];
                     $historyPQ = $historyQuantity * $historyPrice;
                     $historyPQFormat = number_format($historyPQ, 2, '.', ',');
 
@@ -120,9 +124,9 @@
                     $isEmpty = false;
 
                     //Uses this so that it would be Group by the Order Id
-                    if($historyData["id"] != $historyOrderId) {//1 != null
+                    if($historyData['id'] != $historyOrderId) {//1 != null
                         $oldId = $historyOrderId;//null
-                        $historyOrderId = $historyData["id"];//1
+                        $historyOrderId = $historyData['id'];//1
 
                         //The first oldId would always be null so we need to ignore that
                         if($oldId != null) {
@@ -130,9 +134,9 @@
                             $querySelectTotal = "SELECT SUM(item_price * item_quantity) AS totalPrice, SUM(item_quantity) AS totalQuantity FROM tbl_history WHERE id = $oldId";
                             $querySelectTotalResult = $connection->query($querySelectTotal);
                             $historyTotal = $querySelectTotalResult->fetch_assoc();
-                            $historyTotalPrice = $historyTotal["totalPrice"];
+                            $historyTotalPrice = $historyTotal['totalPrice'];
                             $historyTotalPriceFormat = number_format($historyTotalPrice, 2, '.', ',');
-                            $historyTotalQuantity = $historyTotal["totalQuantity"];
+                            $historyTotalQuantity = $historyTotal['totalQuantity'];
                         }
 
                         if($isFirst == false) {
@@ -236,9 +240,9 @@
                     $querySelectTotal = "SELECT SUM(item_price * item_quantity) AS totalPrice, SUM(item_quantity) AS totalQuantity FROM tbl_history WHERE id = $lastId";
                     $querySelectTotalResult = $connection->query($querySelectTotal);
                     $historyTotal = $querySelectTotalResult->fetch_assoc();
-                    $historyTotalPrice = $historyTotal["totalPrice"];
+                    $historyTotalPrice = $historyTotal['totalPrice'];
                     $historyTotalPriceFormat = number_format($historyTotalPrice, 2, '.', ',');
-                    $historyTotalQuantity = $historyTotal["totalQuantity"];
+                    $historyTotalQuantity = $historyTotal['totalQuantity'];
 
                     echo "
                         </tbody>

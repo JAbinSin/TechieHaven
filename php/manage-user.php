@@ -78,15 +78,22 @@
                 // Check for error during database execution
                 if($deleteCategory) {
                     ?>
-                    <script>document.getElementById("myModalOutput").innerHTML = "<?php echo $userEmail; ?> Successfuly Deleted"</script>
-                    <script>myModal.show()</script>
+
+                    <script>
+                        document.getElementById("myModalOutput").innerHTML = "<?php echo $userEmail; ?> Successfuly Deleted"
+                        myModal.show()
+                    </script>
 
                     <?php 
                 }
                 else {
                     ?>
-                    <script>document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"</script>
-                    <script>myModal.show()</script>
+
+                    <script>
+                        document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"
+                        myModal.show()
+                    </script>
+
                     <?php 
                 }
             }
@@ -148,7 +155,7 @@
                                 $queryHistory = "SELECT count(DISTINCT id) AS number FROM tbl_history WHERE (user_id = $userId) AND (status = 'pending' OR status = 'processing')";
                                 $queryHistoryResult = $connection->query($queryHistory);
                                 $queryHistoryResultFetch = $queryHistoryResult->fetch_assoc();
-                                @$orderNumber = $queryHistoryResultFetch["number"];
+                                @$orderNumber = $queryHistoryResultFetch['number'];
 
                                 //The admin cannot delete a fellow admin user
                                 if(!($userData['user_type'] === 'admin')) {

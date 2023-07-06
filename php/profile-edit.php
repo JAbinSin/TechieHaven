@@ -172,16 +172,23 @@
                         $_SESSION['firstRun'] = true;
 
                         ?>
-                        <script>document.getElementById("myModalOutput").innerHTML = "<?php echo $_SESSION['modalEmail']; ?> Successfuly Updated"</script>
-                        <script>document.getElementById("myModalButtons").insertAdjacentHTML("afterbegin", "<a class='btn btn-primary' href='profile.php' role='button'>Profile</a>")</script>
-                        <script>myModal.show()</script>
+
+                        <script>
+                            document.getElementById("myModalOutput").innerHTML = "<?php echo $_SESSION['modalEmail']; ?> Successfuly Updated"
+                            document.getElementById("myModalButtons").insertAdjacentHTML("afterbegin", "<a class='btn btn-primary' href='profile.php' role='button'>Profile</a>")
+                            myModal.show()
+                        </script>
 
                         <?php 
                     }
                     else {
                         ?>
-                        <script>document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"</script>
-                        <script>myModal.show()</script>
+                        
+                        <script>
+                            document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"
+                            myModal.show()
+                        </script>
+                        
                         <?php 
                     }
                     $connection->close();

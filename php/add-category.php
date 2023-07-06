@@ -99,7 +99,7 @@
                     //Moving and naming the img to img/category folder
                     if($uploadedImage == true) {
                         $target_dir = "../img/category/";
-                        @$fileType = pathinfo($_FILES['categoryPicture']['name'])["extension"];
+                        @$fileType = pathinfo($_FILES['categoryPicture']['name'])['extension'];
                         $fileName = $nextId . "_picture." . $fileType;
                         $target_file = $target_dir . $fileName;
                         move_uploaded_file($_FILES['categoryPicture']['tmp_name'], $target_file);
@@ -118,14 +118,18 @@
                         $_SESSION['firstRun'] = true;
 
                         ?>
-                        <script>document.getElementById("myModalOutput").innerHTML = "<?php echo $categoryName; ?> Successfuly Added"</script>
-                        <script>myModal.show()</script>
+                        <script>
+                            document.getElementById("myModalOutput").innerHTML = "<?php echo $categoryName; ?> Successfuly Added"
+                            myModal.show()
+                        </script>
                         <?php 
                     }
                     else {
                         ?>
-                        <script>document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"</script>
-                        <script>myModal.show()</script>
+                        <script>
+                            document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"
+                            myModal.show()
+                        </script>
                         <?php 
                     }
                     $connection->close();

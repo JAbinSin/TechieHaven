@@ -43,7 +43,7 @@
                 include("../modals/modal.php");
                 $cartId = $_POST['btnUpdate'];
             
-                $cartQty = $_POST["Qty_$cartId"];
+                $cartQty = $_POST['Qty_$cartId'];
 
                 //Check if the input is blank
                 //This is just a safety measure if it happens
@@ -68,8 +68,9 @@
 
                     if(!$sqlUpdateResult) {
                         ?>
-                        <script>document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"</script>
-                        <script>myModal.show()</script>
+                        <script>
+                            document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"
+                            myModal.show()</script>
                         <?php 
                     }
                 }
@@ -166,8 +167,10 @@
                     if(!$sqlInsertResult) {
                         $errorCheck = true;
                         ?>
-                        <script>document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"</script>
-                        <script>myModal.show()</script>
+                        <script>
+                            document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"
+                            myModal.show()
+                        </script>
                         <?php 
                     }
                 }
@@ -233,7 +236,7 @@
                     $itemName = $itemData['item_name'];
                     $itemDescription = $itemData['item_description'];
                     $itemPrice = $itemData['item_price'] * $itemQuantity;
-                    $itemUnitPrice = $itemData["item_price"];
+                    $itemUnitPrice = $itemData['item_price'];
                     $itemPicture = $itemData['item_picture'];
                     $itemCategory = $itemData['item_category'];
                     $totalPrice = $totalPrice + $itemPrice;

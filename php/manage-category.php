@@ -82,13 +82,16 @@
             } elseif(isset($_POST['delete-action'])) {
                 $categoryName = $_POST['delete-action'];
                 
-                //Use to delete the picture from the img/category folder
-                //Run this first before deleting the whole column from the table
+                //Select the category picture
                 $queryProfile = "SELECT category_picture FROM tbl_category WHERE category_name = '$categoryName'";
                 $queryProfileResult = $connection->query($queryProfile);
                 $profileResult = $queryProfileResult->fetch_assoc();
                 $path = "../img/category/" . $profileResult['category_picture'];
-                unlink($path);
+
+                //Delete the cateogry picture if the image is not default
+                if($profileResult['category_picture'] != "default.png") {
+                    unlink($path);
+                }
 
                 //Ready the query and execute it to delete the category
                 $deleteQuery = "DELETE FROM tbl_category WHERE category_name = '$categoryName'";
@@ -160,7 +163,7 @@
                     //Moving and naming the img to img/category folder
                     if($uploadedImage == true) {
                         $target_dir = "../img/category/";
-                        @$fileType = pathinfo($_FILES['categoryPicture']['name'])["extension"];
+                        @$fileType = pathinfo($_FILES['categoryPicture']['name'])['extension'];
                         $fileName = $categoryId . "_picture." . $fileType;
                         $target_file = $target_dir . $fileName;
                         move_uploaded_file($_FILES['categoryPicture']['tmp_name'], $target_file);
@@ -176,14 +179,18 @@
 
                     if($sqlUpdateResult) {
                         ?>
-                        <script>document.getElementById("myModalOutput").innerHTML = "<?php echo $categoryName; ?> Successfuly Updated"</script>
-                        <script>myModal.show()</script>
+                        <script>
+                            document.getElementById("myModalOutput").innerHTML = "<?php echo $categoryName; ?> Successfuly Updated"
+                            myModal.show()
+                        </script>
                         <?php 
                     }
                     else {
                         ?>
-                        <script>document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"</script>
-                        <script>myModal.show()</script>
+                        <script>
+                            document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"
+                            myModal.show()
+                        </script>
                         <?php 
                     }
                 } else {
@@ -192,8 +199,10 @@
                     if(empty($error['categoryPicture']))
                         $error['categoryPicture'] = "";
                     ?>
-                        <script>document.getElementById("myModalOutput").innerHTML = "<?php echo $error['categoryName']; ?> <br> <?php echo $error['categoryPicture']; ?>"</script>
-                        <script>myModal.show()</script>
+                        <script>
+                            document.getElementById("myModalOutput").innerHTML = "<?php echo $error['categoryName']; ?> <br> <?php echo $error['categoryPicture']; ?>"
+                            myModal.show()
+                        </script>
                     <?php 
                 }
             }

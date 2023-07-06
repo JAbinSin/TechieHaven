@@ -47,10 +47,10 @@
 
                 // Validate the Inputs
                 // Trim the Inputs
-                $itemName = trim($_POST["itemName"]);
-                $itemPrice = trim($_POST["itemPrice"]);
-                $itemDescription = trim($_POST["itemDescription"]);
-                @$itemCategory = $_POST["itemCategory"];
+                $itemName = trim($_POST['itemName']);
+                $itemPrice = trim($_POST['itemPrice']);
+                $itemDescription = trim($_POST['itemDescription']);
+                @$itemCategory = $_POST['itemCategory'];
 
                 // Remove PHP and HTML tags
                 $itemName = htmlspecialchars(strip_tags($itemName));
@@ -111,7 +111,7 @@
                     //Moving and naming the img to img/category folder
                     if($uploadedImage == true) {
                         $target_dir = "../img/items/";
-                        @$fileType = pathinfo($_FILES['itemPicture']['name'])["extension"];
+                        @$fileType = pathinfo($_FILES['itemPicture']['name'])['extension'];
                         $fileName = $nextId . "_picture." . $fileType;
                         $target_file = $target_dir . $fileName;
                         move_uploaded_file($_FILES['itemPicture']['tmp_name'], $target_file);
@@ -130,14 +130,18 @@
                         $_SESSION['firstRun'] = true;
 
                         ?>
-                        <script>document.getElementById("myModalOutput").innerHTML = "<?php echo $itemName; ?> Successfuly Added"</script>
-                        <script>myModal.show()</script>
+                        <script>
+                            document.getElementById("myModalOutput").innerHTML = "<?php echo $itemName; ?> Successfuly Added"
+                            myModal.show()
+                        </script>
                         <?php 
                     }
                     else {
                         ?>
-                        <script>document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"</script>
-                        <script>myModal.show()</script>
+                        <script>
+                            document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"
+                            myModal.show()
+                        </script>
                         <?php 
                     }
                 }
@@ -190,7 +194,7 @@
                             $sqlQuery = "SELECT category_name FROM tbl_category WHERE category_name NOT LIKE 'All' ORDER BY category_name";
                             $sqlQueryResult = $connection->query($sqlQuery);
                             while($categoryData = $sqlQueryResult->fetch_assoc()) {
-                                $categoryName = $categoryData["category_name"];
+                                $categoryName = $categoryData['category_name'];
                                 if($itemCategory == $categoryName) {
                                     echo "
                                         <option value='$categoryName' selected>$categoryName</option>

@@ -3,23 +3,23 @@
     include_once("../inc/database.php");
 
     //Check if the current session allowed the user to acces this site and redirect if not
-    if(empty($_GET["id"])) {
+    if(empty($_GET['id'])) {
         header("Location: ../index.php");
     }
 
     //Get the id from the url
-    $itemId = $_GET["id"];
+    $itemId = $_GET['id'];
 
     //Query and Execute for the user information
     $querySelectItemInfo = "SELECT * FROM tbl_items WHERE id = $itemId";
     $executeQuerySelectItemInfo = $connection->query($querySelectItemInfo);
     $itemData = $executeQuerySelectItemInfo->fetch_assoc();
 
-    @$itemPicture = $itemData["item_picture"];
-    @$itemName = $itemData["item_name"];
-    @$itemPrice = $itemData["item_price"];
-    @$itemDescription = $itemData["item_description"];
-    @$itemCategory = $itemData["item_category"];
+    @$itemPicture = $itemData['item_picture'];
+    @$itemName = $itemData['item_name'];
+    @$itemPrice = $itemData['item_price'];
+    @$itemDescription = $itemData['item_description'];
+    @$itemCategory = $itemData['item_category'];
 
     //Make variable to Number Format
     $itemPrice = number_format($itemPrice, 2, '.', ',');
@@ -59,7 +59,7 @@
 
                 // Validate the Inputs
                 // Trim the Inputs
-                $itemQuantity = trim($_POST["itemQuantity"]);
+                $itemQuantity = trim($_POST['itemQuantity']);
 
                 // Remove PHP and HTML tags
                 $itemQuantity = htmlspecialchars(strip_tags($itemQuantity));
@@ -85,14 +85,18 @@
                     if($sqlInsertResult) {
 
                         ?>
-                        <script>document.getElementById("myModalOutput").innerHTML = "<?php echo $itemName; ?> Successfuly Added to the Cart. <br> Quantity: <?php echo $itemQuantity; ?>"</script>
-                        <script>myModal.show()</script>
+                        <script>
+                            document.getElementById("myModalOutput").innerHTML = "<?php echo $itemName; ?> Successfuly Added to the Cart. <br> Quantity: <?php echo $itemQuantity; ?>"
+                            myModal.show()
+                        </script>
                         <?php 
                     }
                     else {
                         ?>
-                        <script>document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"</script>
-                        <script>myModal.show()</script>
+                        <script>
+                            document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"
+                            myModal.show()
+                        </script>
                         <?php 
                     }
                 }
@@ -132,7 +136,7 @@
                             <p class="h5">Item Price: ₱<?php echo "$itemPrice"?></p>
                             <?php
                                 //Only the admin and client can see the Add to cart button and the Quantity Input
-                                if((@$_SESSION["userType"] == "admin") || (@$_SESSION["userType"] == "customer")) {
+                                if((@$_SESSION['userType'] == "admin") || (@$_SESSION['userType'] == "customer")) {
                                     echo"
                                         <form action='' method='post'>
                                             <div class='row mt-4'>

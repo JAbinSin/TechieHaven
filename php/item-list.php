@@ -70,6 +70,17 @@
                 
             } elseif(isset($_POST['delete-action'])) {
                 $itemId = $_POST['delete-action'];
+
+                //Select the category picture
+                $queryProfile = "SELECT item_picture FROM tbl_items WHERE id = '$itemId'";
+                $queryProfileResult = $connection->query($queryProfile);
+                $profileResult = $queryProfileResult->fetch_assoc();
+                $path = "../img/items/" . $profileResult['item_picture'];
+
+                //Delete the cateogry picture if the image is not default
+                if($profileResult['item_picture'] != "default.png") {
+                    unlink($path);
+                }
                 
                 //Ready the query and execute it to delete the category
                 $deleteQuery = "DELETE FROM tbl_items WHERE id = '$itemId'";
@@ -83,10 +94,10 @@
 
                 // Validate the Inputs
                 // Trim the Inputs
-                $itemName = trim($_POST["itemName"]);
-                $itemPrice = trim($_POST["itemPrice"]);
-                $itemDescription = trim($_POST["itemDescription"]);
-                @$itemCategory = $_POST["itemCategory"];
+                $itemName = trim($_POST['itemName']);
+                $itemPrice = trim($_POST['itemPrice']);
+                $itemDescription = trim($_POST['itemDescription']);
+                @$itemCategory = $_POST['itemCategory'];
 
                 // Remove PHP and HTML tags
                 $itemName = htmlspecialchars(strip_tags($itemName));
@@ -153,7 +164,7 @@
                     //Moving and naming the img to img/category folder
                     if($uploadedImage == true) {
                         $target_dir = "../img/items/";
-                        @$fileType = pathinfo($_FILES['itemPicture']['name'])["extension"];
+                        @$fileType = pathinfo($_FILES['itemPicture']['name'])['extension'];
                         $fileName = $itemId . "_picture." . $fileType;
                         $target_file = $target_dir . $fileName;
                         move_uploaded_file($_FILES['itemPicture']['tmp_name'], $target_file);
@@ -169,14 +180,18 @@
 
                     if($sqlUpdateResult) {
                         ?>
-                        <script>document.getElementById("myModalOutput").innerHTML = "<?php echo $itemName; ?> Successfuly Updated"</script>
-                        <script>myModal.show()</script>
+                        <script>
+                            document.getElementById("myModalOutput").innerHTML = "<?php echo $itemName; ?> Successfuly Updated"
+                            myModal.show()
+                        </script>
                         <?php 
                     }
                     else {
                         ?>
-                        <script>document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"</script>
-                        <script>myModal.show()</script>
+                        <script>
+                            document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"
+                            myModal.show()
+                        </script>
                         <?php 
                     }
                 } else {
@@ -191,8 +206,10 @@
                     if(empty($error['itemCategory']))
                         $error['itemCategory'] = "";
                     ?>
-                        <script>document.getElementById("myModalOutput").innerHTML = "<?php echo $error['itemName']; ?> <br> <?php echo $error['itemDescription']; ?> <br> <?php echo $error['itemPrice']; ?><br> <?php echo $error['itemPicture']; ?><br> <?php echo $error['itemCategory']; ?>"</script>
-                        <script>myModal.show()</script>
+                        <script>
+                            document.getElementById("myModalOutput").innerHTML = "<?php echo $error['itemName']; ?> <br> <?php echo $error['itemDescription']; ?> <br> <?php echo $error['itemPrice']; ?><br> <?php echo $error['itemPicture']; ?><br> <?php echo $error['itemCategory']; ?>"
+                            myModal.show()
+                        </script>
                     <?php 
                 }
             }

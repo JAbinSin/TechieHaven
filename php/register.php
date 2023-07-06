@@ -101,10 +101,28 @@
 			$sqlQueryResult = $connection->query($sqlQuery);
 			if($sqlQueryResult->num_rows > 0)  
 				$error['email'] = "Email Already Exist";
-			?> 
-			
 
-			<?php
+			// For phone number Validation
+            $phoneNum = strval($cellphoneNumber);
+            $phoneNetworks = substr($phoneNum, 0, 4);
+            $phoneNetworkSmartTNT = array("0813", "0907", "0908", "0909", "0910", "0911", "0912", "0913", "0914" ,"0918", "0919", "0920", "0921", "0928", "0929", "0930", "0938", "0939", "0946", "0947", "0948", "0949", "0950", "0951", "0961", "0963", "0968", "0970", "0981", "0989", "0992", "0998", "0999");
+            $phoneNetworkGlobe = array("0817", "0905", "0906", "0915", "0916", "0917", "0926", "0927", "0935", "0936", "0937", "0945", "0953", "0954", "0955", "0956", "0965", "0966", "0967", "0975", "0976", "0977", "0978", "0979", "0994", "0995", "0996", "0997");
+            $phoneNetworkDITO = array("0991", "0992", "0993", "0994", "0895", "0896", "0897", "0898");
+            $phoneNetworkSun = array("0922", "0923", "0924", "0925", "0931", "0932", "0933", "0934", "0940", "0941", "0942", "0943", "0944", "0973", "0974");
+
+            if(strlen($phoneNum) != 11)
+                $error['cellphoneNumber'] = "Phone Number must be 11 Character Long";
+            elseif(in_array($phoneNetworks, $phoneNetworkSmartTNT))
+                $userInputs['mobileNetwork'] = "Smart or TNT";
+            elseif(in_array($phoneNetworks, $phoneNetworkGlobe))
+                $userInputs['mobileNetwork'] = "Globe";
+            elseif(in_array($phoneNetworks, $phoneNetworkDITO))
+                $userInputs['mobileNetwork'] = "DITO";
+            elseif(in_array($phoneNetworks, $phoneNetworkSun))
+                $userInputs['mobileNetwork'] = "Sun";
+            else
+                $error['cellphoneNumber'] = "Phone Number must be a Valid Philippine Mobile Network";
+
 			if(empty($error)) {
 				foreach($userInputs as $k => $v) {
 					$_SESSION[$k] = $v;
@@ -135,16 +153,23 @@
 					$_SESSION['firstRun'] = true;
 
 					?>
-					<script>document.getElementById("myModalButtons").insertAdjacentHTML("afterbegin", "<a class='btn btn-primary' href='login.php' role='button'>Login</a>")</script>
-					<script>document.getElementById("myModalOutput").innerHTML = "<?php echo $_SESSION['modalEmail']; ?> Successfuly Registered"</script>
-					<script>myModal.show()</script>
+
+					<script>
+						document.getElementById("myModalButtons").insertAdjacentHTML("afterbegin", "<a class='btn btn-primary' href='login.php' role='button'>Login</a>")
+						document.getElementById("myModalOutput").innerHTML = "<?php echo $_SESSION['modalEmail']; ?> Successfuly Registered"
+						myModal.show()
+					</script>
 
 					<?php 
 				}
 				else {
 					?>
-					<script>document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"</script>
-					<script>myModal.show()</script>
+					
+					<script>
+						document.getElementById("myModalOutput").innerHTML = "Error occured. Please try again later. <br><?php echo $connection->error; ?>"
+						myModal.show()
+					</script>
+
 					<?php 
 				}
 				$connection->close();
