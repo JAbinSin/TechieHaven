@@ -168,6 +168,14 @@
                         $target_file = $target_dir . $fileName;
                         move_uploaded_file($_FILES['categoryPicture']['tmp_name'], $target_file);
                     }
+
+                    $sqlGetName = "SELECT category_name FROM tbl_category WHERE id = '$categoryId'";
+                    $sqlGetNameResult = $connection->query($sqlGetName);
+                    $sqlGetNameCategory = $sqlGetNameResult->fetch_assoc();
+                    $oldCategoryName = $sqlGetNameCategory['category_name'];
+
+                    $sqlUpdate1 = "UPDATE tbl_items SET item_category = '$categoryName' WHERE item_category = '$oldCategoryName'";
+                    $sqlUpdate1Result = $connection->query($sqlUpdate1);
                     
                     if($uploadedImage == true){
                         $sqlUpdate = "UPDATE tbl_category SET category_name = '$categoryName', category_picture = '$fileName' WHERE id = '$categoryId'";
@@ -177,7 +185,7 @@
                         $sqlUpdateResult = $connection->query($sqlUpdate);
                     }
 
-                    if($sqlUpdateResult) {
+                    if($sqlUpdateResult && $sqlUpdate1Result) {
                         ?>
                         <script>
                             document.getElementById("myModalOutput").innerHTML = "<?php echo $categoryName; ?> Successfuly Updated"
@@ -230,7 +238,7 @@
                             echo "
                             <tr>
                                 <td>
-                                    <a href='category-list.php?category={$categoryData['category_name']}'><img src='../img/category/{$categoryData['category_picture']}' alt='Category Unavailable' class='rounded-3' style='width: 5rem; height: 5rem;'></a>
+                                    <a href='item-list.php?category={$categoryData['category_name']}'><img src='../img/category/{$categoryData['category_picture']}' alt='Category Unavailable' class='rounded-3' style='width: 5rem; height: 5rem;'></a>
                                 </td>
                                 <td>
                                     {$categoryData['category_name']}
